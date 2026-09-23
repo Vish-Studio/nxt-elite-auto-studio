@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Alata } from "next/font/google";
 import { publicAsset } from "@/lib/public-asset";
-import "leaflet/dist/leaflet.css";
 import "./globals.css";
 
 const alata = Alata({ subsets: ["latin"], weight: "400", variable: "--font-alata", adjustFontFallback: false });

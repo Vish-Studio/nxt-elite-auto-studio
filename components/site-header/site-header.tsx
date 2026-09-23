@@ -14,7 +14,7 @@ const SiteHeader = () => {
     return () => window.removeEventListener("scroll", updateHeader);
   }, []);
 
-  return <header className={`site-header${isScrolled ? " is-scrolled" : ""}`}><div className="site-header__inner shell"><a className="brand-lockup" href="#home"><span className="brand-lockup__logo"><BrandMark priority variant="icon" /></span><span>Elite Auto Studio</span></a><nav aria-label="Primary navigation"><a href="#services">Services</a><a href="#works">Our Works</a><a href="#packages">Price Packages</a><a href="#process">Process</a><a href="#faq">FAQs</a><a href="#testimonials">Testimonials</a></nav><PrimaryLink href="#contact">Book now</PrimaryLink></div></header>;
+  return <header className={`site-header${isScrolled ? " is-scrolled" : ""}`}><div className="site-header__inner shell"><a className="brand-lockup" href="#home"><span className="brand-lockup__logo"><BrandMark priority variant="icon" /></span><span>Elite Auto Studio</span></a><nav aria-label="Primary navigation"><a href="#about">About</a><a href="#services">Services</a><a href="#works">Our Works</a><a href="#process">Process</a><a href="#faq">FAQs</a><a href="#testimonials">Testimonials</a></nav><PrimaryLink href="#contact">Book now</PrimaryLink></div></header>;
 };
 
 export default SiteHeader;
