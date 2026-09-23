@@ -10,7 +10,7 @@ import ServiceCard from "@/components/service-card/service-card";
 import ServiceAreaMap from "@/components/service-area-map/service-area-map";
 import SiteFooter from "@/components/site-footer/site-footer";
 import SiteHeader from "@/components/site-header/site-header";
-import TestimonialCard from "@/components/testimonial-card/testimonial-card";
+import TestimonialCarousel from "@/components/testimonial-carousel/testimonial-carousel";
 
 const services = [
   ["01", "Interior Detail", "Deep cleaning for seats, carpets, trim and every hard-to-reach surface."],
@@ -87,13 +87,11 @@ const Page = () => <main>
 
   <section className="process light-section" id="process"><div className="shell process__layout"><Reveal className="process__intro" direction="left"><p className="section-label">How it works</p><h2>Four simple<br /><span>steps.</span></h2><p>Clear communication, careful work and no unnecessary waiting rooms.</p></Reveal><Reveal className="process__steps" delay={120} direction="right">{steps.map(([number, title, description]) => <ProcessStep description={description} key={number} number={number} title={title} />)}</Reveal></div><Reveal className="process__media shell" delay={180}><MediaCard {...processVisual} /></Reveal></section>
 
-  <section className="service-area shell"><Reveal direction="left"><p className="section-label">Service area</p><h2>Mobile across<br /><span>central Belgium.</span></h2></Reveal><Reveal className="area-list" delay={120} direction="right"><p>Brussels Capital Region</p><p>Flemish Brabant</p><p>Walloon Brabant</p><small>Outside these areas? Contact us and we&apos;ll confirm availability.</small></Reveal></section>
-
   <section className="audiences light-section"><div className="shell"><Reveal className="section-top"><div><p className="section-label">Who we work with</p><h2>Care built around<br /><span>your vehicle.</span></h2></div><p>Flexible mobile detailing for individual owners, specialist cars and professional fleets.</p></Reveal><Reveal className="benefit-grid audience-grid" delay={120}>{audiences.map(([number, title, description]) => <BenefitCard description={description} key={number} number={number} title={title} />)}</Reveal></div></section>
 
   <section className="faq shell" id="faq"><Reveal className="faq__intro" direction="left"><p className="section-label">Questions, answered</p><h2>Before we<br /><span>get started.</span></h2></Reveal><Reveal className="faq__list" delay={120} direction="right">{faqs.map(([question, answer]) => <FaqItem answer={answer} key={question} question={question} />)}</Reveal></section>
 
-  <section className="testimonials light-section" id="testimonials"><div className="shell"><Reveal className="section-top"><div><p className="section-label">Testimonials</p><h2>Trusted for the<br /><span>details.</span></h2></div><p>Feedback from owners and businesses who choose mobile care at their home or workplace.</p></Reveal><Reveal className="testimonial-grid" delay={120}>{testimonials.map((item) => <TestimonialCard {...item} key={`${item.source}-${item.location}`} />)}</Reveal></div></section>
+  <section className="testimonials light-section" id="testimonials"><div className="shell"><Reveal className="section-top"><div><p className="section-label">Testimonials</p><h2>Trusted for the<br /><span>details.</span></h2></div><p>Feedback from owners and businesses who choose mobile care at their home or workplace.</p></Reveal><Reveal delay={120}><TestimonialCarousel testimonials={testimonials} /></Reveal></div></section>
 
   <section className="contact-band" id="contact"><Reveal className="shell contact-band__inner"><div><p>Elite Auto Studio</p><h2>Ready for a<br /><span>better finish?</span></h2></div><div><p>Tell us about your vehicle and we&apos;ll recommend the right service for its condition and your goals.</p><PrimaryLink href="mailto:hello@eliteautostudio.be">Request a booking</PrimaryLink></div></Reveal></section>
 
