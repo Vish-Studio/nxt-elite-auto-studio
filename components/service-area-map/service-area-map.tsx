@@ -1,9 +1,10 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import PrimaryLink from "@/components/primary-link/primary-link";
 
 const ServiceAreaMapClient = dynamic(() => import("@/components/service-area-map-client/service-area-map-client"), { ssr: false, loading: () => <div className="coverage-map__loading">Loading service map…</div> });
 
-const ServiceAreaMap = () => <section aria-labelledby="coverage-title" className="coverage-section"><div className="coverage-section__intro shell"><div><p className="section-label">Where we operate</p><h2 id="coverage-title">Mobile detailing across <span>central Belgium.</span></h2></div><p>We come to homes and workplaces throughout Brussels and the surrounding Brabant regions. The highlighted locations show our primary service area.</p></div><div className="coverage-map" aria-label="Interactive service coverage map of Belgium"><div className="coverage-map__header"><span>Mobile detailing coverage</span><strong>Belgium</strong></div><ServiceAreaMapClient /><div className="coverage-map__legend"><span><i />Areas we serve</span><strong>Brussels · Flemish Brabant · Walloon Brabant</strong></div></div></section>;
+const ServiceAreaMap = () => <section aria-labelledby="coverage-title" className="coverage-section" id="service-area"><div aria-label="Interactive service coverage map of Belgium" className="coverage-map"><ServiceAreaMapClient /><div className="coverage-map__overlay"><div className="coverage-map__panel"><p>Mobile detailing coverage</p><h2 id="coverage-title">Your address,<br /><span>our service area.</span></h2><span>Premium care, brought to your home or workplace.</span><PrimaryLink href="#contact">Book in your area</PrimaryLink></div><div className="coverage-map__availability"><strong>65 km</strong><span>from Brussels</span></div></div><div className="coverage-map__legend"><span><i />Live service radius</span><strong>Home: interior + exterior · Office: interior only</strong></div></div></section>;
 
 export default ServiceAreaMap;

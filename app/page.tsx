@@ -8,6 +8,7 @@ import ProcessStep from "@/components/process-step/process-step";
 import ProcessStepGallery from "@/components/process-step-gallery/process-step-gallery";
 import Reveal from "@/components/reveal/reveal";
 import ServiceCard from "@/components/service-card/service-card";
+import ServiceAreaMap from "@/components/service-area-map/service-area-map";
 import SiteFooter from "@/components/site-footer/site-footer";
 import SiteHeader from "@/components/site-header/site-header";
 import TestimonialCarousel from "@/components/testimonial-carousel/testimonial-carousel";
@@ -67,6 +68,8 @@ const Page = () => <main>
   <Hero />
 
   <section className="benefits shell" id="about"><Reveal className="section-top section-top--dark"><div><p className="section-label">About Elite</p><h2>Detailing built<br />around <span>your day.</span></h2></div><p>Premium mobile care for the vehicles you value, with an approach that respects your time and your finish.</p></Reveal><Reveal className="benefit-grid" delay={120}>{benefits.map(([number, title, description]) => <BenefitCard description={description} key={number} number={number} title={title} />)}</Reveal></section>
+
+  <ServiceAreaMap />
 
   <section className="services light-section" id="services"><div className="shell"><Reveal className="section-top"><div><p className="section-label">Our services</p><h2>Everything your car <span>needs.</span></h2></div><p>From regular upkeep to complete transformation, every service is adapted to the condition of your vehicle.</p></Reveal><Reveal className="service-grid" delay={120}>{services.map(([number, title, description]) => <ServiceCard description={description} key={number} number={number} title={title} />)}</Reveal><Reveal className="service-media-grid" delay={180}>{serviceVisuals.map((item) => <MediaCard {...item} key={item.title} />)}</Reveal></div></section>
 
