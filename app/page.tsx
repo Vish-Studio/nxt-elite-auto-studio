@@ -1,13 +1,16 @@
 import BenefitCard from "@/components/benefit-card/benefit-card";
 import FaqItem from "@/components/faq-item/faq-item";
 import Hero from "@/components/hero/hero";
+import MediaCard from "@/components/media-card/media-card";
 import PackageCard from "@/components/package-card/package-card";
 import PrimaryLink from "@/components/primary-link/primary-link";
 import ProcessStep from "@/components/process-step/process-step";
 import Reveal from "@/components/reveal/reveal";
 import ServiceCard from "@/components/service-card/service-card";
+import ServiceAreaMap from "@/components/service-area-map/service-area-map";
 import SiteFooter from "@/components/site-footer/site-footer";
 import SiteHeader from "@/components/site-header/site-header";
+import TestimonialCard from "@/components/testimonial-card/testimonial-card";
 
 const services = [
   ["01", "Interior Detail", "Deep cleaning for seats, carpets, trim and every hard-to-reach surface."],
@@ -26,6 +29,25 @@ const packages = [
   { label: "Essential care", title: "Refresh", description: "A focused reset for vehicles that need regular, professional upkeep.", features: ["Exterior hand wash", "Wheels and tyres", "Interior vacuum", "Dashboard and trim"] },
   { label: "Most complete", title: "Signature", description: "A thorough inside-and-out detail for a visibly renewed vehicle.", features: ["Deep interior clean", "Exterior decontamination", "Hand-applied protection", "Detailed final inspection"] },
   { label: "Presentation ready", title: "Sale Prep", description: "Targeted preparation that helps your vehicle make the right impression.", features: ["Interior presentation detail", "Paintwork enhancement", "Glass and finishing touches", "Photo-ready handover"] },
+];
+
+const works = [
+  { label: "Exterior detail", title: "Deep exterior care", variant: "large" as const, position: "center", src: "https://images.unsplash.com/photo-1746593934498-b335e4e04845?auto=format&fit=crop&q=85&w=1800", credit: "Srinivasa Yadav", creditHref: "https://unsplash.com/photos/black-car-in-a-modern-car-wash-p8wO38qEIhk" },
+  { label: "Wash process", title: "Safe foam treatment", variant: "small" as const, position: "center", src: "https://images.unsplash.com/photo-1769641156607-16833781bc16?auto=format&fit=crop&q=85&w=1400", credit: "Avenir Visuals", creditHref: "https://unsplash.com/photos/person-washing-a-car-covered-in-foam-52VoFM9fPV8" },
+  { label: "Paintwork care", title: "A finish worth protecting", variant: "small" as const, position: "center", src: "https://images.unsplash.com/photo-1761312834150-4beefff097a7?auto=format&fit=crop&q=85&w=1400", credit: "Willian Cittadin", creditHref: "https://unsplash.com/photos/black-car-covered-in-soap-suds-during-wash-bCQSrcYghJI" },
+];
+
+const serviceVisuals = [
+  { label: "Interior care", title: "A cabin reset with every surface considered", variant: "large" as const, position: "center", src: "https://images.unsplash.com/photo-1605437241278-c1806d14a4d9?fit=crop&fm=webp&q=80&w=1200", credit: "Ján Vlačuha", creditHref: "https://unsplash.com/photos/U4IaoKF5aj4", unoptimized: true },
+  { label: "Wheel detail", title: "Care carried through to the smallest details", variant: "small" as const, position: "center", src: "https://images.unsplash.com/photo-1708805282683-50a060eba80f?fit=crop&fm=webp&q=80&w=1200", credit: "Zac Nielson", creditHref: "https://unsplash.com/photos/person-cleaning-car-tire-with-brush-8k_T1EwTySs" },
+];
+
+const processVisual = { label: "Paint correction", title: "Professional technique. A finish you can see.", variant: "large" as const, position: "center 42%", src: "https://images.unsplash.com/photo-1708805282706-f44730b7e527?auto=format&fit=crop&q=85&w=2200", credit: "Zac Nielson", creditHref: "https://unsplash.com/photos/CsZjHjFN3N8" };
+
+const testimonials = [
+  { quote: "The car felt completely refreshed, and I did not have to leave home for the appointment.", source: "Private client", location: "Brussels" },
+  { quote: "Clear communication, careful work and a finish that exceeded expectations.", source: "Private client", location: "Flemish Brabant" },
+  { quote: "A convenient service for our company vehicles with consistent attention to detail.", source: "Business client", location: "Walloon Brabant" },
 ];
 
 const audiences = [
@@ -53,19 +75,25 @@ const Page = () => <main>
 
   <Hero />
 
-  <section className="services light-section" id="services"><div className="shell"><Reveal className="section-top"><div><p className="section-label">Our services</p><h2>Everything your car <span>needs.</span></h2></div><p>From regular upkeep to complete transformation, every service is adapted to the condition of your vehicle.</p></Reveal><Reveal className="service-grid" delay={120}>{services.map(([number, title, description]) => <ServiceCard description={description} key={number} number={number} title={title} />)}</Reveal></div></section>
+  <ServiceAreaMap />
 
-  <section className="packages shell" id="packages"><Reveal className="section-top section-top--dark"><div><p className="section-label">Detailing packages</p><h2>Choose your level<br />of <span>care.</span></h2></div><p>Every booking is confirmed after we understand your vehicle, its condition and the result you want.</p></Reveal><Reveal className="package-grid" delay={120}>{packages.map((item) => <PackageCard description={item.description} features={item.features} key={item.title} label={item.label} title={item.title} />)}</Reveal></section>
+  <section className="services light-section" id="services"><div className="shell"><Reveal className="section-top"><div><p className="section-label">Our services</p><h2>Everything your car <span>needs.</span></h2></div><p>From regular upkeep to complete transformation, every service is adapted to the condition of your vehicle.</p></Reveal><Reveal className="service-grid" delay={120}>{services.map(([number, title, description]) => <ServiceCard description={description} key={number} number={number} title={title} />)}</Reveal><Reveal className="service-media-grid" delay={180}>{serviceVisuals.map((item) => <MediaCard {...item} key={item.title} />)}</Reveal></div></section>
+
+  <section className="works shell" id="works"><Reveal className="section-top section-top--dark"><div><p className="section-label">Our works</p><h2>Care you can<br /><span>see.</span></h2></div><p>A closer look at the methods, finishes and attention that shape every detailing appointment.</p></Reveal><Reveal className="work-grid" delay={120}>{works.map((item) => <MediaCard {...item} key={item.title} />)}</Reveal></section>
+
+  <section className="packages light-section" id="packages"><div className="shell"><Reveal className="section-top"><div><p className="section-label">Price packages</p><h2>Choose your level<br />of <span>care.</span></h2></div><p>Every booking is confirmed after we understand your vehicle, its condition and the result you want.</p></Reveal><Reveal className="package-grid" delay={120}>{packages.map((item) => <PackageCard description={item.description} features={item.features} key={item.title} label={item.label} title={item.title} />)}</Reveal></div></section>
 
   <section className="benefits shell" id="about"><Reveal className="section-top section-top--dark"><div><p className="section-label">Why Elite</p><h2>Convenience without<br /><span>compromise.</span></h2></div><p>Your time matters. So does the standard of work carried out on your vehicle.</p></Reveal><Reveal className="benefit-grid" delay={120}>{benefits.map(([number, title, description]) => <BenefitCard description={description} key={number} number={number} title={title} />)}</Reveal></section>
 
-  <section className="process light-section" id="process"><div className="shell process__layout"><Reveal className="process__intro" direction="left"><p className="section-label">How it works</p><h2>Four simple<br /><span>steps.</span></h2><p>Clear communication, careful work and no unnecessary waiting rooms.</p></Reveal><Reveal className="process__steps" delay={120} direction="right">{steps.map(([number, title, description]) => <ProcessStep description={description} key={number} number={number} title={title} />)}</Reveal></div></section>
+  <section className="process light-section" id="process"><div className="shell process__layout"><Reveal className="process__intro" direction="left"><p className="section-label">How it works</p><h2>Four simple<br /><span>steps.</span></h2><p>Clear communication, careful work and no unnecessary waiting rooms.</p></Reveal><Reveal className="process__steps" delay={120} direction="right">{steps.map(([number, title, description]) => <ProcessStep description={description} key={number} number={number} title={title} />)}</Reveal></div><Reveal className="process__media shell" delay={180}><MediaCard {...processVisual} /></Reveal></section>
 
   <section className="service-area shell"><Reveal direction="left"><p className="section-label">Service area</p><h2>Mobile across<br /><span>central Belgium.</span></h2></Reveal><Reveal className="area-list" delay={120} direction="right"><p>Brussels Capital Region</p><p>Flemish Brabant</p><p>Walloon Brabant</p><small>Outside these areas? Contact us and we&apos;ll confirm availability.</small></Reveal></section>
 
   <section className="audiences light-section"><div className="shell"><Reveal className="section-top"><div><p className="section-label">Who we work with</p><h2>Care built around<br /><span>your vehicle.</span></h2></div><p>Flexible mobile detailing for individual owners, specialist cars and professional fleets.</p></Reveal><Reveal className="benefit-grid audience-grid" delay={120}>{audiences.map(([number, title, description]) => <BenefitCard description={description} key={number} number={number} title={title} />)}</Reveal></div></section>
 
   <section className="faq shell" id="faq"><Reveal className="faq__intro" direction="left"><p className="section-label">Questions, answered</p><h2>Before we<br /><span>get started.</span></h2></Reveal><Reveal className="faq__list" delay={120} direction="right">{faqs.map(([question, answer]) => <FaqItem answer={answer} key={question} question={question} />)}</Reveal></section>
+
+  <section className="testimonials light-section" id="testimonials"><div className="shell"><Reveal className="section-top"><div><p className="section-label">Testimonials</p><h2>Trusted for the<br /><span>details.</span></h2></div><p>Feedback from owners and businesses who choose mobile care at their home or workplace.</p></Reveal><Reveal className="testimonial-grid" delay={120}>{testimonials.map((item) => <TestimonialCard {...item} key={`${item.source}-${item.location}`} />)}</Reveal></div></section>
 
   <section className="contact-band" id="contact"><Reveal className="shell contact-band__inner"><div><p>Elite Auto Studio</p><h2>Ready for a<br /><span>better finish?</span></h2></div><div><p>Tell us about your vehicle and we&apos;ll recommend the right service for its condition and your goals.</p><PrimaryLink href="mailto:hello@eliteautostudio.be">Request a booking</PrimaryLink></div></Reveal></section>
 
