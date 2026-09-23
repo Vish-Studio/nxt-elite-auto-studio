@@ -71,15 +71,20 @@ h2 span { font-weight: 300; }
 .coverage-section { padding-top: var(--section-space); }
 .coverage-map { background: var(--color-map); min-height: 720px; overflow: hidden; position: relative; width: 100%; }
 .coverage-map__overlay { align-items: start; display: flex; justify-content: space-between; left: max(1rem, calc((100vw - var(--shell)) / 2)); pointer-events: none; position: absolute; right: max(1rem, calc((100vw - var(--shell)) / 2)); top: 2rem; z-index: 500; }
-.coverage-map__panel { background: rgba(5, 5, 5, .88); border-left: 1px solid var(--color-gold); display: flex; flex-direction: column; max-width: 29rem; padding: clamp(1.5rem, 3vw, 2.4rem); pointer-events: auto; }
+.coverage-map__radius-note { align-items: center; background: rgba(5, 5, 5, .82); color: var(--color-ivory); display: grid; gap: .15rem .55rem; grid-template-columns: auto 1fr; padding: .8rem .9rem; }
+.coverage-map__radius-note i { background: var(--color-gold); border-radius: var(--radius-square); box-shadow: 0 0 0 4px var(--color-gold-soft); grid-row: span 2; height: 7px; width: 7px; }
+.coverage-map__radius-note span { color: var(--color-fog); font-size: .54rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.coverage-map__radius-note strong { font-size: .8rem; font-weight: 400; letter-spacing: -.02em; }
+.coverage-map__panel { background: rgba(5, 5, 5, .9); border-right: 1px solid var(--color-gold); display: flex; flex-direction: column; max-width: 29rem; padding: clamp(1.5rem, 3vw, 2.4rem); pointer-events: auto; }
 .coverage-map__panel p { color: var(--color-gold); font-size: .62rem; font-weight: 700; letter-spacing: .1em; margin: 0 0 1rem; text-transform: uppercase; }
 .coverage-map__panel h2 { color: var(--color-ivory); font-size: clamp(2.5rem, 4vw, 4.5rem); line-height: .94; }
 .coverage-map__panel h2 span { color: var(--color-gold); }
 .coverage-map__panel > span { color: var(--color-fog); font-size: .76rem; line-height: 1.6; margin-top: 1.3rem; max-width: 19rem; }
+.coverage-map__panel dl { border-top: 1px solid var(--color-rule); display: grid; gap: .9rem; grid-template-columns: repeat(2, 1fr); margin: 1.6rem 0 0; padding-top: 1rem; }
+.coverage-map__panel dl div { display: flex; flex-direction: column; gap: .35rem; }
+.coverage-map__panel dt { color: var(--color-gold); font-size: .54rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.coverage-map__panel dd { color: var(--color-ivory); font-size: .68rem; line-height: 1.4; margin: 0; }
 .coverage-map__panel .primary-link { align-self: start; margin-top: 1.6rem; }
-.coverage-map__availability { align-items: end; background: var(--color-gold); color: var(--color-void); display: flex; flex-direction: column; min-width: 8.5rem; padding: .95rem 1rem; text-align: right; }
-.coverage-map__availability strong { font-size: 1.6rem; font-weight: 400; letter-spacing: -.06em; line-height: 1; }
-.coverage-map__availability span { font-size: .55rem; font-weight: 700; letter-spacing: .1em; margin-top: .4rem; text-transform: uppercase; }
 .coverage-map__leaflet, .coverage-map__loading { height: 100%; inset: 0; min-height: 680px; position: absolute; width: 100%; }
 .coverage-map__loading { align-items: center; display: flex; font-size: .68rem; justify-content: center; letter-spacing: .1em; text-transform: uppercase; }
 .coverage-map .leaflet-container { background: var(--color-map); font-family: var(--font-alata), Arial, sans-serif; }
@@ -286,7 +291,7 @@ h2 span { font-weight: 300; }
   .coverage-map__overlay { align-items: stretch; flex-direction: column; gap: .75rem; left: 1rem; right: 1rem; top: 1rem; }
   .coverage-map__panel { max-width: 100%; padding: 1.35rem; }
   .coverage-map__panel h2 { font-size: clamp(2.5rem, 12vw, 4rem); }
-  .coverage-map__availability { align-self: end; min-width: 7.2rem; }
+  .coverage-map__radius-note { align-self: start; }
   .coverage-map__legend { border-radius: var(--radius-square); left: 1rem; right: 1rem; }
   .coverage-map__legend { align-items: start; flex-direction: column; gap: .55rem; }
   .coverage-map__legend strong { line-height: 1.5; }
