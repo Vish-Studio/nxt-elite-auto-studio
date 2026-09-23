@@ -205,19 +205,21 @@ h2 span { font-weight: 300; }
 .faq-item p { color: var(--color-fog); font-size: .92rem; font-weight: 300; line-height: 1.6; margin: 0; max-width: 34rem; padding: 0 3rem 1.25rem 1.25rem; }
 
 .testimonial-carousel { margin-top: 4rem; }
-.testimonial-carousel__viewport { min-height: 310px; position: relative; }
+.testimonial-carousel__viewport { min-height: 480px; position: relative; }
 .testimonial-carousel__slide { inset: 0; opacity: 0; pointer-events: none; position: absolute; transition: opacity .35s ease; }
 .testimonial-carousel__slide.is-active { opacity: 1; pointer-events: auto; position: relative; }
-.testimonial-card { background: var(--color-ivory); border-radius: var(--radius-square); display: flex; flex-direction: column; margin: 0; min-height: 310px; padding: 1.7rem; }
+.testimonial-carousel__index { color: var(--color-gold); font-size: .62rem; font-weight: 700; letter-spacing: .1em; position: absolute; right: clamp(1.5rem, 4vw, 3rem); top: clamp(1.5rem, 4vw, 3rem); z-index: 2; }
+.testimonial-card { background: var(--color-void); border-radius: var(--radius-square); color: var(--color-ivory); display: flex; flex-direction: column; margin: 0; min-height: 480px; padding: clamp(1.8rem, 5vw, 4rem); }
 .testimonial-card > svg { color: var(--color-gold); }
-.testimonial-card blockquote { font-size: 1.18rem; font-weight: 300; letter-spacing: -.02em; line-height: 1.5; margin: 3.5rem 0 2rem; }
-.testimonial-card figcaption { display: flex; flex-direction: column; gap: .35rem; margin-top: auto; }
-.testimonial-card figcaption strong { font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; }
-.testimonial-card figcaption span { color: var(--color-ink-muted); font-size: .72rem; }
-.testimonial-carousel__footer { align-items: center; display: flex; justify-content: space-between; margin-top: 1.25rem; }
+.testimonial-card blockquote { font-size: clamp(1.9rem, 4vw, 4.4rem); font-weight: 400; letter-spacing: -.055em; line-height: .98; margin: auto 0 3rem; max-width: 58rem; }
+.testimonial-card figcaption { align-items: center; border-top: 1px solid var(--color-rule); display: flex; gap: 1.1rem; padding-top: 1rem; }
+.testimonial-card figcaption strong { font-size: .67rem; letter-spacing: .1em; text-transform: uppercase; }
+.testimonial-card figcaption span { color: var(--color-fog); font-size: .72rem; }
+.testimonial-card figcaption span::before { color: var(--color-gold); content: "•"; margin-right: 1.1rem; }
+.testimonial-carousel__footer { align-items: center; border-top: 1px solid var(--color-dark-rule); display: flex; justify-content: space-between; margin-top: 1rem; padding-top: 1rem; }
 .testimonial-carousel__pagination, .testimonial-carousel__controls { display: flex; gap: .5rem; }
 .testimonial-carousel__pagination button, .testimonial-carousel__controls button { background: transparent; border: 1px solid var(--color-void); border-radius: var(--radius-square); color: var(--color-void); cursor: pointer; height: 2.5rem; padding: 0; transition: background-color .2s ease, color .2s ease; width: 2.5rem; }
-.testimonial-carousel__pagination button { height: 8px; opacity: .35; width: 8px; }
+.testimonial-carousel__pagination button { height: 3px; opacity: .28; width: 2.5rem; }
 .testimonial-carousel__pagination button[aria-selected="true"] { background: var(--color-gold); border-color: var(--color-gold); opacity: 1; }
 .testimonial-carousel__controls button:hover { background: var(--color-void); color: var(--color-ivory); }
 
@@ -304,6 +306,10 @@ h2 span { font-weight: 300; }
   .process__media { margin-top: 3rem; }
   .process-gallery__viewport { min-height: 420px; }
   .process-gallery__controls { grid-template-columns: 1fr 1fr; }
+  .testimonial-carousel__viewport, .testimonial-card { min-height: 430px; }
+  .testimonial-card blockquote { margin-bottom: 2rem; }
+  .testimonial-card figcaption { align-items: start; flex-direction: column; gap: .5rem; }
+  .testimonial-card figcaption span::before { margin-right: .5rem; }
   .faq { gap: 3rem; }
   .contact-band h2 { font-size: clamp(3.4rem, 14vw, 4.8rem); }
   .site-footer__lead { align-items: start; flex-direction: column; gap: 2.5rem; }

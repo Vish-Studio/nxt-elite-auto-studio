@@ -23,7 +23,7 @@ const TestimonialCarousel = ({ testimonials }: TestimonialCarouselProps) => {
 
   return <div aria-label="Client testimonials" className="testimonial-carousel" role="region">
     <div aria-live="polite" className="testimonial-carousel__viewport">
-      {testimonials.map((testimonial, index) => <div aria-hidden={index !== activeIndex} className={`testimonial-carousel__slide${index === activeIndex ? " is-active" : ""}`} id={`testimonial-${index + 1}`} key={`${testimonial.source}-${testimonial.location}`}><TestimonialCard {...testimonial} /></div>)}
+      {testimonials.map((testimonial, index) => <div aria-hidden={index !== activeIndex} className={`testimonial-carousel__slide${index === activeIndex ? " is-active" : ""}`} id={`testimonial-${index + 1}`} key={`${testimonial.source}-${testimonial.location}`}><span className="testimonial-carousel__index">{String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}</span><TestimonialCard {...testimonial} /></div>)}
     </div>
     <div className="testimonial-carousel__footer">
       <div aria-label="Choose a testimonial" className="testimonial-carousel__pagination" role="tablist">{testimonials.map((testimonial, index) => <button aria-controls={`testimonial-${index + 1}`} aria-label={`Show testimonial ${index + 1}`} aria-selected={index === activeIndex} key={`${testimonial.source}-${testimonial.location}`} onClick={() => goTo(index)} role="tab" type="button" />)}</div>
