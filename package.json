@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@next/third-parties": "^16.3.8",
     "@phosphor-icons/react": "^2.1.10",
     "@tailwindcss/postcss": "^4.3.3",
     "leaflet": "^1.9.4",

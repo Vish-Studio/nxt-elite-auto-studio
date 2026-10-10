@@ -1266,8 +1266,38 @@ h2 span {
   font-size: 0.59rem;
   justify-content: space-between;
   letter-spacing: 0.08em;
-  padding: 1.5rem 0 2rem;
+  padding: 1.5rem 0;
   text-transform: uppercase;
+}
+.site-footer__credit-bar {
+  align-items: center;
+  border-top: 1px solid var(--color-rule);
+  display: flex;
+  font-size: 0.68rem;
+  gap: 0.6rem;
+  justify-content: center;
+  letter-spacing: 0.12em;
+  padding: 1.4rem 0 2rem;
+  text-transform: uppercase;
+}
+.site-footer__credit-bar span {
+  color: var(--color-fog);
+}
+.site-footer__credit {
+  align-items: center;
+  border-bottom: 1px solid var(--color-gold);
+  color: var(--color-ivory);
+  display: inline-flex;
+  font-weight: 700;
+  gap: 0.35rem;
+  padding-bottom: 0.2rem;
+  transition: color 0.2s ease;
+}
+.site-footer__credit svg {
+  color: var(--color-gold);
+}
+.site-footer__credit:hover {
+  color: var(--color-gold);
 }
 .site-footer__bottom a {
   align-items: center;
