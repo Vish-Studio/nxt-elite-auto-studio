@@ -1,0 +1,44 @@
+.site-header { background: var(--color-void); inset: 0 0 auto; position: fixed; transition: background-color .3s ease, backdrop-filter .3s ease; z-index: 2000; }
+.site-header.is-scrolled { backdrop-filter: blur(14px); background: rgba(5, 5, 5, .96); }
+.site-header__inner { align-items: center; display: grid; grid-template-columns: minmax(150px, 1fr) auto minmax(120px, 1fr); height: var(--topbar-height); }
+.site-header__brand-group, .site-header__actions { align-items: center; display: flex; gap: .7rem; }
+.site-header__actions { gap: .65rem; justify-self: end; }
+.mobile-menu-toggle, .mobile-navigation__close { background: transparent; border: 0; color: var(--color-ivory); cursor: pointer; padding: .25rem; }
+.mobile-menu-toggle { display: none; }
+.brand-lockup { align-items: center; display: inline-flex; font-size: .67rem; font-weight: 700; gap: .65rem; letter-spacing: .1em; text-transform: uppercase; }
+.brand-lockup__logo { display: inline-block; height: 29px; overflow: hidden; width: 29px; }
+.brand-lockup .brand-mark { height: 100%; object-fit: cover; width: 100%; }
+.site-header nav { display: flex; gap: clamp(.75rem, 1.35vw, 1.5rem); }
+.site-header nav a { font-size: .59rem; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
+.site-header nav a:hover { text-decoration: underline; text-underline-offset: .4rem; }
+.site-header .primary-link { padding: .82rem .9rem; }
+.mobile-navigation { display: none; }
+
+@media (max-width: 1040px) {
+  .site-header__inner { grid-template-columns: 1fr auto; }
+  .site-header > .site-header__inner > nav { display: none; }
+  .mobile-menu-toggle, .mobile-navigation__close { align-items: center; display: inline-flex; justify-content: center; }
+  .site-header__actions > div:first-child { display: none; }
+  .site-header .primary-link { font-size: .56rem; padding: .75rem .7rem; }
+  .mobile-navigation { display: block; inset: 0; position: fixed; z-index: 1; }
+  .mobile-navigation__backdrop { animation: backdrop-in .35s ease both; background: rgba(5, 5, 5, .68); border: 0; cursor: pointer; inset: 0; padding: 0; position: absolute; width: 100%; }
+  .mobile-navigation__panel { animation: panel-in .45s cubic-bezier(.2, .7, .2, 1) both; background: var(--color-surface); color: var(--color-ivory); display: flex; flex-direction: column; inset: 0 auto 0 0; min-height: 100svh; overflow-y: auto; padding: 1.25rem; position: absolute; width: min(86vw, 23rem); }
+  .mobile-navigation__top, .mobile-navigation__map > div { align-items: center; display: flex; justify-content: space-between; }
+  .mobile-navigation__top { border-bottom: 1px solid var(--color-rule); font-size: .6rem; font-weight: 700; letter-spacing: .1em; padding-bottom: 1.25rem; text-transform: uppercase; }
+  .mobile-navigation__panel nav { display: flex; flex-direction: column; margin-top: .85rem; }
+  .mobile-navigation__panel nav a { align-items: baseline; display: flex; font-size: 1.08rem; gap: .65rem; letter-spacing: -.04em; padding: .45rem 0; text-transform: none; }
+  .mobile-navigation__panel nav a span, .mobile-navigation__map span { color: var(--color-gold); font-size: .56rem; font-weight: 700; letter-spacing: .1em; }
+  .mobile-navigation__language { position: relative; }
+  .mobile-navigation__language > div, .mobile-navigation__language > div > button { width: 100%; }
+  .mobile-navigation__language > div > [role="listbox"] { bottom: calc(100% + .4rem); top: auto; }
+  .mobile-navigation__map { border-top: 1px solid var(--color-rule); display: grid; gap: .7rem; margin-top: .85rem; padding-top: .75rem; }
+  .mobile-navigation__map strong { color: var(--color-fog); font-size: .58rem; font-weight: 400; letter-spacing: .06em; text-transform: uppercase; }
+  .mobile-navigation-map { background: var(--color-map); height: 104px; isolation: isolate; position: relative; width: 100%; }
+  .mobile-navigation-map .leaflet-tile-pane { filter: grayscale(1) invert(1) brightness(.7) contrast(.8); opacity: .78; }
+  .mobile-navigation__actions { display: grid; gap: .7rem; margin-top: 1rem; position: relative; }
+  .mobile-navigation__actions .primary-link { align-self: stretch; width: 100%; }
+}
+@media (max-width: 760px) { .brand-lockup > span:last-child { font-size: .58rem; } }
+@keyframes panel-in { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+@keyframes backdrop-in { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .site-header { transition: none; } .mobile-navigation__backdrop, .mobile-navigation__panel { animation: none; } }
