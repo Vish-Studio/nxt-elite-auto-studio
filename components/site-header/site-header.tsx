@@ -11,7 +11,7 @@ import PrimaryLink from "@/components/primary-link/primary-link";
 
 const MobileNavigationMap = dynamic(() => import("@/components/mobile-navigation-map/mobile-navigation-map"), { ssr: false, loading: () => <div className="mobile-navigation-map mobile-navigation-map--loading">Loading service area…</div> });
 
-const navigationLinks = (language: "en" | "fr") => language === "fr" ? [["À propos", "#about"], ["Services", "#services"], ["Tarifs", "#pricing"], ["Réalisations", "#works"], ["Processus", "#process"], ["FAQ", "#faq"], ["Témoignages", "#testimonials"]] : [["About", "#about"], ["Services", "#services"], ["Price packages", "#pricing"], ["Our works", "#works"], ["Process", "#process"], ["FAQs", "#faq"], ["Testimonials", "#testimonials"]];
+const navigationLinks = (language: "en" | "fr") => language === "fr" ? [["À propos", "#about"], ["Services", "#services"], ["Tarifs", "#pricing"], ["FAQ", "#faq"], ["Témoignages", "#testimonials"]] : [["About", "#about"], ["Services", "#services"], ["Pricing", "#pricing"], ["FAQs", "#faq"], ["Testimonials", "#testimonials"]];
 
 const languages = [
   { code: "en", flag: "🇬🇧", label: "English" },
@@ -25,10 +25,19 @@ const SiteHeader = () => {
   const links = navigationLinks(language);
 
   useEffect(() => {
-    const updateHeader = () => setIsScrolled(window.scrollY > 24);
+    // Stay transparent while the header still overlaps the hero, then turn solid.
+    const updateHeader = () => {
+      const hero = document.getElementById("home");
+      const headerHeight = document.querySelector(".site-header")?.clientHeight ?? 0;
+      setIsScrolled(hero ? hero.getBoundingClientRect().bottom <= headerHeight : window.scrollY > 24);
+    };
     updateHeader();
     window.addEventListener("scroll", updateHeader, { passive: true });
-    return () => window.removeEventListener("scroll", updateHeader);
+    window.addEventListener("resize", updateHeader);
+    return () => {
+      window.removeEventListener("scroll", updateHeader);
+      window.removeEventListener("resize", updateHeader);
+    };
   }, []);
 
   useEffect(() => {
