@@ -5,6 +5,7 @@
 @import "../components/site-header/site-header.css";
 @import "../components/service-area-map/service-area-map.css";
 @import "../components/process-step-gallery/process-step-gallery.css";
+@import "../components/works-carousel/works-carousel.css";
 @import "../components/site-footer/site-footer.css";
 
 @theme {
@@ -48,9 +49,10 @@ body {
   overflow-x: clip;
 }
 
-a { color: inherit; text-decoration: none; }
-
-h1, h2, h3 { font-family: var(--font-display); }
+@layer base {
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3 { font-family: var(--font-display); }
+}
 
 .shell { margin-inline: auto; width: var(--shell); }
 

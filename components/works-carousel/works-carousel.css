@@ -1,0 +1,32 @@
+.works-carousel { margin-top: 4rem; }
+.works-carousel__stage { display: grid; gap: .75rem; grid-template-columns: repeat(2, minmax(0, 1fr)); touch-action: pan-y; }
+.works-carousel__panel { aspect-ratio: 4 / 3.4; background: var(--color-surface); margin: 0; overflow: hidden; position: relative; }
+.works-carousel__slide { inset: 0; opacity: 0; position: absolute; transition: opacity .7s ease; }
+.works-carousel__slide.is-active { opacity: 1; }
+.works-carousel__slide img { object-fit: cover; }
+.works-carousel__panel figcaption { background: rgba(5, 5, 5, .78); color: var(--color-ivory); font-size: .62rem; font-weight: 600; left: 1.1rem; letter-spacing: .12em; padding: .5rem .75rem; position: absolute; text-transform: uppercase; top: 1.1rem; z-index: 2; }
+.works-carousel__panel--after figcaption { background: var(--color-gold); color: var(--color-void); }
+.works-carousel__footer { align-items: end; display: flex; gap: 2rem; justify-content: space-between; margin-top: 1.6rem; }
+.works-carousel__caption { animation: works-caption-in .6s ease both; }
+.works-carousel__caption span { color: var(--color-gold); font-size: .62rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+.works-carousel__caption h3 { font-size: clamp(1.5rem, 2.4vw, 2.2rem); font-weight: 400; letter-spacing: -.025em; margin: .5rem 0 0; }
+.works-carousel__controls { align-items: center; display: flex; flex-shrink: 0; gap: .5rem; }
+.works-carousel__controls span { color: var(--color-gold); font-size: .62rem; font-weight: 600; letter-spacing: .1em; margin-right: .75rem; }
+.works-carousel__controls button { align-items: center; background: transparent; border: 1px solid var(--color-rule); color: var(--color-ivory); cursor: pointer; display: inline-flex; height: 2.75rem; justify-content: center; transition: background-color .2s ease, border-color .2s ease, color .2s ease; width: 2.75rem; }
+.works-carousel__controls button:hover { background: var(--color-gold); border-color: var(--color-gold); color: var(--color-void); }
+.works-carousel__tabs { border-top: 1px solid var(--color-rule); display: grid; gap: 1.5rem; grid-auto-columns: minmax(0, 1fr); grid-auto-flow: column; margin-top: 1.6rem; }
+.works-carousel__tabs button { background: transparent; border: 0; border-top: 2px solid transparent; color: var(--color-fog); cursor: pointer; display: flex; font: inherit; font-size: .72rem; gap: .6rem; margin-top: -1px; padding: 1rem 0 0; text-align: left; transition: border-color .3s ease, color .3s ease; }
+.works-carousel__tabs button span { color: var(--color-gold); font-size: .6rem; font-weight: 600; }
+.works-carousel__tabs button[aria-selected="true"] { border-color: var(--color-gold); color: var(--color-ivory); }
+.works-carousel__tabs button:hover { color: var(--color-ivory); }
+@keyframes works-caption-in { from { opacity: 0; transform: translateY(.4rem); } to { opacity: 1; transform: none; } }
+@media (max-width: 760px) {
+  .works-carousel { margin-top: 3rem; }
+  .works-carousel__stage { gap: .4rem; }
+  .works-carousel__panel { aspect-ratio: 3 / 4; }
+  .works-carousel__panel figcaption { font-size: .52rem; left: .6rem; padding: .4rem .55rem; top: .6rem; }
+  .works-carousel__footer { gap: 1rem; }
+  .works-carousel__controls span { display: none; }
+  .works-carousel__tabs { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .works-carousel__slide { transition: none; } .works-carousel__caption { animation: none; } }
