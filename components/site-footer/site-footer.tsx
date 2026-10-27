@@ -34,7 +34,6 @@ const copy = {
     services: ["Interior cleaning", "Exterior cleaning", "Full cleaning", "Headlight renovation"],
     contact: ["Brussels, Belgium", "By appointment"],
     rights: "All rights reserved.",
-    motto: "Quality · Precision · Finish",
     backToTop: "Back to top",
     websiteBy: "Website by",
   },
@@ -61,7 +60,6 @@ const copy = {
     ],
     contact: ["Bruxelles, Belgique", "Sur rendez-vous"],
     rights: "Tous droits réservés.",
-    motto: "Qualité · Précision · Finition",
     backToTop: "Retour en haut",
     websiteBy: "Site web par",
   },
@@ -146,26 +144,27 @@ const SiteFooter = () => {
           </FooterColumn>
         </div>
 
-        <div className="flex justify-between py-6 text-[0.59rem] tracking-[0.08em] uppercase max-md:flex-col max-md:gap-[0.8rem]">
-          <span>
+        <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-6 border-t border-rule py-8 text-[0.62rem] tracking-[0.08em] uppercase max-md:grid-cols-1 max-md:justify-items-center max-md:gap-5 max-md:text-center">
+          <span className="justify-self-start max-md:justify-self-center">
             © 2026 Elite Auto Studio. {t.rights} | <CookieSettingsButton />
           </span>
-          <span>{t.motto}</span>
-          <a className="inline-flex items-center gap-[0.4rem] text-gold" href="#home">
+          <a
+            className="inline-flex items-center gap-[0.4rem] text-gold transition-colors duration-200 hover:text-ivory"
+            href="#home"
+          >
             {t.backToTop} <ArrowUpIcon aria-hidden="true" size={12} weight="bold" />
           </a>
-        </div>
-
-        <div className="flex items-center justify-center gap-[0.6rem] border-t border-rule pt-[1.4rem] pb-8 text-[0.68rem] tracking-[0.12em] uppercase">
-          <span className="text-fog">{t.websiteBy}</span>
-          <a
-            className="inline-flex items-center gap-[0.35rem] border-b border-gold pb-[0.2rem] font-semibold text-ivory transition-colors duration-200 hover:text-gold [&_svg]:text-gold"
-            href="https://www.vish.studio"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Vish Studio <ArrowUpRightIcon aria-hidden="true" size={13} weight="bold" />
-          </a>
+          <span className="flex items-center gap-[0.6rem] justify-self-end max-md:justify-self-center">
+            <span className="text-fog">{t.websiteBy}</span>
+            <a
+              className="inline-flex items-center gap-[0.35rem] border-b border-gold pb-[0.2rem] font-semibold text-ivory transition-colors duration-200 hover:text-gold [&_svg]:text-gold"
+              href="https://www.vish.studio"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              Vish Studio <ArrowUpRightIcon aria-hidden="true" size={13} weight="bold" />
+            </a>
+          </span>
         </div>
       </div>
     </footer>

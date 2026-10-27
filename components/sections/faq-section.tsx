@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import FaqItem from "@/components/faq-item/faq-item";
 import { type Language, useLanguage } from "@/components/language-provider/language-provider";
+import ParallaxBackground from "@/components/parallax-background/parallax-background";
 import SectionLabel from "@/components/section-label/section-label";
 import SectionTitle from "@/components/section-title/section-title";
 
@@ -55,14 +55,10 @@ const FaqSection = () => {
 
   return (
     <section className="relative isolate overflow-hidden py-(--section-space)" id="faq">
-      <Image
-        alt=""
-        className="-z-20 object-cover"
-        fill
-        sizes="100vw"
+      <ParallaxBackground
+        overlayClassName="bg-linear-to-r from-void/80 via-void/60 to-void/35 max-md:bg-void/65 max-md:bg-none"
         src="https://images.unsplash.com/photo-1605164598708-25701594473e?auto=format&fit=crop&q=80&w=2200"
       />
-      <div className="absolute inset-0 -z-10 bg-linear-to-r from-void/95 via-void/85 to-void/60 max-md:bg-void/80 max-md:bg-none" />
       <div className="shell grid grid-cols-[0.8fr_1.2fr] gap-24 max-md:flex max-md:flex-col max-md:gap-12">
         <div>
           <SectionLabel className="mb-7">{t.label}</SectionLabel>

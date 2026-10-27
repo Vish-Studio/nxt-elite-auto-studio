@@ -3,6 +3,7 @@
 import { type Language, useLanguage } from "@/components/language-provider/language-provider";
 import MobileCarousel from "@/components/mobile-carousel/mobile-carousel";
 import PackageCard from "@/components/package-card/package-card";
+import ParallaxBackground from "@/components/parallax-background/parallax-background";
 import SectionHeader from "@/components/section-header/section-header";
 import { formatPrice } from "@/lib/format-price";
 
@@ -113,10 +114,11 @@ const PricingSection = () => {
   const t = copy[language];
 
   return (
-    <section
-      className="relative isolate bg-[linear-gradient(90deg,rgba(5,5,5,0.96),rgba(5,5,5,0.88)),url(https://images.unsplash.com/photo-1608506375591-b90e1f955e4b?auto=format&fit=crop&q=88&w=2200)] bg-cover bg-center py-(--section-space)"
-      id="pricing"
-    >
+    <section className="relative isolate overflow-hidden py-(--section-space)" id="pricing">
+      <ParallaxBackground
+        overlayClassName="bg-linear-to-r from-void/75 via-void/55 to-void/40 max-md:bg-void/60 max-md:bg-none"
+        src="https://images.unsplash.com/photo-1608506375591-b90e1f955e4b?auto=format&fit=crop&q=88&w=2200"
+      />
       <div className="shell">
         <SectionHeader {...t} tone="dark" />
         <MobileCarousel ariaLabel={t.label}>

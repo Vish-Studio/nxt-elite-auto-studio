@@ -2,6 +2,7 @@ import Hero from "@/components/hero/hero";
 import ServiceAreaMap from "@/components/service-area-map/service-area-map";
 import AboutSection from "@/components/sections/about-section";
 import ContactSection from "@/components/sections/contact-section";
+import EquipmentSection from "@/components/sections/equipment-section";
 import FaqSection from "@/components/sections/faq-section";
 import PricingSection from "@/components/sections/pricing-section";
 import ProcessSection from "@/components/sections/process-section";
@@ -19,6 +20,7 @@ const Page = () => (
     <WorksSection />
     <ServiceAreaMap />
     <ServicesSection />
+    <EquipmentSection />
     <PricingSection />
     <ProcessSection />
     <FaqSection />

@@ -53,18 +53,20 @@ Corners are square everywhere. The only round shapes are the icon rings in the a
 
 ## Components to reuse
 
-| Need                                             | Use                                                                                                           |
-| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- |
-| Eyebrow above a heading                          | `SectionLabel` (`size="sm"` inside panels)                                                                    |
-| Heading with accent                              | `SectionTitle`                                                                                                |
-| Label + heading left, description right          | `SectionHeader` (`tone="dark"` on dark sections)                                                              |
-| Primary call to action                           | `PrimaryLink` (`variant="gold" \| "outline"`, `size="sm"` in the header); pass `track` for analytics          |
-| Cards that swipe on mobile, 3-up grid on desktop | `MobileCarousel` (`tone` must match the section)                                                              |
-| Language-aware copy                              | `useLanguage()`; colocate `copy = { en, fr } satisfies Record<Language, unknown>` in the section file         |
-| Prices                                           | `formatPrice(amount, language)` — never `Intl`, it can differ between server and browser                      |
-| Images                                           | `next/image` with `fill` + `object-cover` inside a sized, `relative overflow-hidden` box; always pass `sizes` |
-| Headline that animates in                        | `SectionTitle`, or `MaskLine` per line for a custom `h1`/`h2`                                                 |
-| Tracked links/buttons                            | `TrackedLink` or `PrimaryLink track={…}`; events go through `trackEvent` (consent-gated)                      |
+| Need                                             | Use                                                                                                                    |
+| ------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| Eyebrow above a heading                          | `SectionLabel` (`size="sm"` inside panels)                                                                             |
+| Heading with accent                              | `SectionTitle`                                                                                                         |
+| Label + heading left, description right          | `SectionHeader` (`tone="dark"` on dark sections)                                                                       |
+| Primary call to action                           | `PrimaryLink` (`variant="gold" \| "outline"`, `size="sm"` in the header); pass `track` for analytics                   |
+| Any other button                                 | `buttonClasses({ variant, size, className })` from `lib/button-styles.ts`; hover is a colour change only, never a lift |
+| Section with a photo background                  | `ParallaxBackground` (first child of a `relative isolate overflow-hidden` section)                                     |
+| Cards that swipe on mobile, 3-up grid on desktop | `MobileCarousel` (`tone` must match the section)                                                                       |
+| Language-aware copy                              | `useLanguage()`; colocate `copy = { en, fr } satisfies Record<Language, unknown>` in the section file                  |
+| Prices                                           | `formatPrice(amount, language)` — never `Intl`, it can differ between server and browser                               |
+| Images                                           | `next/image` with `fill` + `object-cover` inside a sized, `relative overflow-hidden` box; always pass `sizes`          |
+| Headline that animates in                        | `SectionTitle`, or `MaskLine` per line for a custom `h1`/`h2`                                                          |
+| Tracked links/buttons                            | `TrackedLink` or `PrimaryLink track={…}`; events go through `trackEvent` (consent-gated)                               |
 
 Sections live in `components/sections/*-section.tsx`; `app/page.tsx` only lists them and stays a server component. Any component using hooks or event handlers needs `"use client"`.
 
@@ -78,8 +80,9 @@ Sections live in `components/sections/*-section.tsx`; `app/page.tsx` only lists 
   - Content: add `data-reveal` to the element (label, paragraph, card, carousel, list row…). `PrimaryLink` takes a `reveal` prop. Elements in a row stagger automatically; content waits briefly for its section's headline.
   - Content that scrolls sideways (a swipeable carousel): put `data-reveal-group` on its root so the whole group reveals together; its `data-reveal` children can sit off-screen and would never count as visible on their own.
   - Only elements inside `<main>` are hidden before they reveal. Don't use `data-reveal` outside it (e.g. the cookie banner).
-- **Rules**: never put a CSS `transition` on `transform` (or `transition-transform` / `transition-all`) on a `data-reveal` element, because it fights GSAP; use `transition-[translate]` for hover movement. Don't use GSAP's SplitText on React-rendered text (it rewrites the DOM and breaks on language change). Keys of translated lists must not be the translated text.
+- **Rules**: never put a CSS `transition` on `transform` (or `transition-transform` / `transition-all`) on a `data-reveal` element, because it fights GSAP; buttons and cards change colour on hover instead of moving (see `lib/button-styles.ts`), which also keeps hover from fighting the reveal. Don't use GSAP's SplitText on React-rendered text (it rewrites the DOM and breaks on language change). Keys of translated lists must not be the translated text.
 - **Fallbacks**: the hidden state only applies when scripting is on and reduced motion is off (`globals.css`), so the page is fully readable otherwise. Elements React mounts later are shown immediately. The hero photo parallax is a scrubbed ScrollTrigger in `hero-background-carousel.tsx`.
+- **Parallax**: section photos use `ParallaxBackground`, which drifts the photo slower than the page (desktop only, still on mobile and with reduced motion, like the hero). Keep its overlay light enough that cards and text read against the photo, not against black: about `void/75 → void/40`, with cards at `bg-void/85` plus a hairline border.
 - **Why IntersectionObserver, not ScrollTrigger, fires reveals**: ScrollTrigger stores trigger positions, which go stale when images, fonts or the language change the page height, leaving elements hidden even though they are on screen. IntersectionObserver reads live layout. Keep ScrollTrigger only for scrubbed effects (the hero parallax). After changing reveal code, test with real wheel scrolling and pauses, not only instant jumps.
 - Use `import { gsap, ScrollTrigger } from "@/lib/gsap"` (registers the plugin once); wrap new tweens in `gsap.matchMedia()` so they clean up and respect reduced motion.
 
@@ -94,9 +97,13 @@ Sections live in `components/sections/*-section.tsx`; `app/page.tsx` only lists 
 </section>
 ```
 
-- Alternate light (`bg-paper text-void`) and dark (`bg-void` / image + dark overlay) sections. Current order: hero (dark) · about (light) · works (dark) · map (split) · services (light) · pricing (dark image) · process (light) · FAQ (dark image) · testimonials (light) · contact (surface) · footer (dark).
-- Dark image backgrounds: `next/image` `fill` at `-z-20`, gradient overlay `bg-linear-to-r from-void/95 via-void/85 to-void/60` at `-z-10`, section `relative isolate overflow-hidden`.
+- Alternate light (`bg-paper text-void`) and dark (`bg-void` / image + dark overlay) sections. Current order: hero (dark) · about (light) · works (dark) · map (split) · services (light) · equipment (ivory) · pricing (dark photo, parallax) · process (light) · FAQ (dark photo, parallax) · testimonials (light) · contact (surface) · footer (dark).
+- Dark image backgrounds: use `ParallaxBackground` with `overlayClassName` (see Motion); never stack an opaque near-black overlay on the photo.
 - Header nav links target section ids: `#about`, `#services`, `#pricing`, `#faq`, `#testimonials`; the header turns solid after `#home`.
+
+## Footer
+
+The bottom row is one line: copyright and cookie settings on the left, "Back to top" centred, "Website by Vish Studio" on the right; it stacks centred on mobile.
 
 ## Design rules
 

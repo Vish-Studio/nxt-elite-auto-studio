@@ -2,7 +2,7 @@ import { ArrowUpRightIcon } from "@phosphor-icons/react/ssr";
 import type { ReactNode } from "react";
 import TrackedLink from "@/components/analytics/tracked-link";
 import type { AnalyticsParams } from "@/lib/analytics";
-import { cn } from "@/lib/cn";
+import { buttonClasses, type ButtonSize, type ButtonVariant } from "@/lib/button-styles";
 
 type PrimaryLinkProps = {
   children: ReactNode;
@@ -11,19 +11,9 @@ type PrimaryLinkProps = {
   href: string;
   /** Fade in with the rest of the section (see PageMotion). */
   reveal?: boolean;
-  size?: "md" | "sm";
+  size?: ButtonSize;
   track?: { event: string; params?: AnalyticsParams };
-  variant?: "gold" | "outline";
-};
-
-const variants = {
-  gold: "bg-gold text-void",
-  outline: "border-ivory bg-void text-ivory border",
-};
-
-const sizes = {
-  md: "px-[1.15rem] py-4 text-[0.65rem]",
-  sm: "px-[0.9rem] py-[0.82rem] text-[0.65rem] max-lg:px-[0.7rem] max-lg:py-3 max-lg:text-[0.56rem]",
+  variant?: ButtonVariant;
 };
 
 const PrimaryLink = ({
@@ -35,12 +25,7 @@ const PrimaryLink = ({
   track,
   variant = "gold",
 }: PrimaryLinkProps) => {
-  const classes = cn(
-    "inline-flex items-center justify-center gap-4 font-semibold tracking-[0.1em] whitespace-nowrap uppercase transition-[translate] duration-200 hover:-translate-y-0.5",
-    variants[variant],
-    sizes[size],
-    className,
-  );
+  const classes = buttonClasses({ className, size, variant });
   const content = (
     <>
       {children}

@@ -2,6 +2,7 @@
 
 import { useSyncExternalStore } from "react";
 import SectionLabel from "@/components/section-label/section-label";
+import { buttonClasses } from "@/lib/button-styles";
 import { useLanguage } from "@/components/language-provider/language-provider";
 import { getConsent, getServerConsent, setConsent, subscribeToConsent } from "@/lib/cookie-consent";
 
@@ -28,14 +29,14 @@ const CookieBanner = () => {
       </div>
       <div className="flex shrink-0 gap-3">
         <button
-          className="inline-flex flex-1 cursor-pointer items-center justify-center border border-ivory bg-void px-[1.15rem] py-4 text-[0.65rem] font-semibold tracking-[0.1em] whitespace-nowrap text-ivory uppercase transition-transform duration-200 hover:-translate-y-0.5 md:flex-none"
+          className={buttonClasses({ className: "flex-1 md:flex-none", variant: "outline" })}
           onClick={() => setConsent("denied")}
           type="button"
         >
           {fr ? "Refuser" : "Decline"}
         </button>
         <button
-          className="inline-flex flex-1 cursor-pointer items-center justify-center bg-gold px-[1.15rem] py-4 text-[0.65rem] font-semibold tracking-[0.1em] whitespace-nowrap text-void uppercase transition-transform duration-200 hover:-translate-y-0.5 md:flex-none"
+          className={buttonClasses({ className: "flex-1 md:flex-none" })}
           onClick={() => setConsent("granted")}
           type="button"
         >
