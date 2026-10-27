@@ -9,7 +9,8 @@ const GoogleAnalytics = () => {
   const consent = useSyncExternalStore(subscribeToConsent, getConsent, getServerConsent);
   useEffect(() => {
     if (!GA_MEASUREMENT_ID) return;
-    (window as unknown as Record<string, boolean>)[`ga-disable-${GA_MEASUREMENT_ID}`] = consent !== "granted";
+    (window as unknown as Record<string, boolean>)[`ga-disable-${GA_MEASUREMENT_ID}`] =
+      consent !== "granted";
   }, [consent]);
   if (!GA_MEASUREMENT_ID || consent !== "granted") return null;
   return <NextGoogleAnalytics gaId={GA_MEASUREMENT_ID} />;

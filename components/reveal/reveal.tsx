@@ -1,7 +1,7 @@
 "use client";
 
-import type { CSSProperties, ReactNode } from "react";
-import { useEffect, useRef, useState } from "react";
+import { type ReactNode, useEffect, useRef, useState } from "react";
+import { cn } from "@/lib/cn";
 
 type RevealProps = {
   children: ReactNode;
@@ -10,7 +10,14 @@ type RevealProps = {
   direction?: "up" | "left" | "right";
 };
 
-const Reveal = ({ children, className = "", delay = 0, direction = "up" }: RevealProps) => {
+const hiddenOffset = {
+  up: "translate-y-8",
+  // Horizontal entrances fall back to vertical on mobile to avoid horizontal overflow.
+  left: "-translate-x-8 max-md:translate-x-0 max-md:translate-y-8",
+  right: "translate-x-8 max-md:translate-x-0 max-md:translate-y-8",
+};
+
+const Reveal = ({ children, className, delay = 0, direction = "up" }: RevealProps) => {
   const elementRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -18,26 +25,40 @@ const Reveal = ({ children, className = "", delay = 0, direction = "up" }: Revea
     const element = elementRef.current;
     if (!element) return;
 
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (reducedMotion.matches || !("IntersectionObserver" in window)) {
+    if (
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      !("IntersectionObserver" in window)
+    ) {
       setIsVisible(true);
       return;
     }
 
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
         setIsVisible(true);
         observer.unobserve(entry.target);
-      }
-    }, { rootMargin: "0px 0px -10%", threshold: 0.12 });
+      },
+      { rootMargin: "0px 0px -10%", threshold: 0.12 },
+    );
 
     observer.observe(element);
     return () => observer.disconnect();
   }, []);
 
-  const style = { "--reveal-delay": `${delay}ms` } as CSSProperties;
-
-  return <div className={`reveal reveal--${direction}${isVisible ? " is-visible" : ""}${className ? ` ${className}` : ""}`} ref={elementRef} style={style}>{children}</div>;
+  return (
+    <div
+      className={cn(
+        "transition duration-750 ease-motion motion-reduce:translate-none motion-reduce:opacity-100 motion-reduce:transition-none",
+        isVisible ? "translate-none opacity-100" : cn("opacity-0", hiddenOffset[direction]),
+        className,
+      )}
+      ref={elementRef}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </div>
+  );
 };
 
 export default Reveal;

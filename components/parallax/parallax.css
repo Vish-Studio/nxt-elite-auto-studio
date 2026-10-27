@@ -1,2 +1,0 @@
-.parallax { transform: translate3d(0, var(--parallax-offset, 0), 0); will-change: transform; }
-@media (prefers-reduced-motion: reduce) { .parallax { transform: none; } }

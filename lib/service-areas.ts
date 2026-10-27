@@ -1,7 +1,12 @@
 export type LatLng = [number, number];
 export type CountryCode = "lu" | "be" | "fr";
 export type Locality = { name: string; position: LatLng };
-export type ServiceCountry = { code: CountryCode; name: { en: string; fr: string }; labelSide: "north" | "south"; localities: Locality[] };
+export type ServiceCountry = {
+  code: CountryCode;
+  name: { en: string; fr: string };
+  labelSide: "north" | "south";
+  localities: Locality[];
+};
 
 export const serviceCountries: ServiceCountry[] = [
   {
@@ -66,18 +71,31 @@ const earthRadius = 6371000;
 const toRadians = (degrees: number) => (degrees * Math.PI) / 180;
 
 const distance = ([lat1, lng1]: LatLng, [lat2, lng2]: LatLng) => {
-  const a = Math.sin(toRadians(lat2 - lat1) / 2) ** 2 + Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) * Math.sin(toRadians(lng2 - lng1) / 2) ** 2;
+  const a =
+    Math.sin(toRadians(lat2 - lat1) / 2) ** 2 +
+    Math.cos(toRadians(lat1)) *
+      Math.cos(toRadians(lat2)) *
+      Math.sin(toRadians(lng2 - lng1) / 2) ** 2;
   return 2 * earthRadius * Math.asin(Math.sqrt(a));
 };
 
 // Circle that wraps every locality of a country, with a little breathing room.
 export const coverageCircle = (country: ServiceCountry, padding = 4000) => {
   const points = country.localities.map(({ position }) => position);
-  const center: LatLng = [points.reduce((sum, [lat]) => sum + lat, 0) / points.length, points.reduce((sum, [, lng]) => sum + lng, 0) / points.length];
+  const center: LatLng = [
+    points.reduce((sum, [lat]) => sum + lat, 0) / points.length,
+    points.reduce((sum, [, lng]) => sum + lng, 0) / points.length,
+  ];
   const radius = Math.max(...points.map((point) => distance(center, point))) + padding;
   const labelOffset = (radius / earthRadius) * (180 / Math.PI);
-  const label: LatLng = [center[0] + (country.labelSide === "north" ? labelOffset : -labelOffset), center[1]];
+  const label: LatLng = [
+    center[0] + (country.labelSide === "north" ? labelOffset : -labelOffset),
+    center[1],
+  ];
   return { center, label, radius };
 };
 
-export const totalLocalities = serviceCountries.reduce((sum, country) => sum + country.localities.length, 0);
+export const totalLocalities = serviceCountries.reduce(
+  (sum, country) => sum + country.localities.length,
+  0,
+);
