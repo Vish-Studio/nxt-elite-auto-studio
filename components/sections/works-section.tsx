@@ -1,7 +1,6 @@
 "use client";
 
 import { type Language, useLanguage } from "@/components/language-provider/language-provider";
-import Reveal from "@/components/reveal/reveal";
 import SectionHeader from "@/components/section-header/section-header";
 import WorksCarousel, { type WorkItem } from "@/components/works-carousel/works-carousel";
 import { publicAsset } from "@/lib/public-asset";
@@ -113,9 +112,9 @@ const WorksSection = () => {
     <section className="py-(--section-space)" id="works">
       <div className="shell">
         <SectionHeader {...t} tone="dark" />
-        <Reveal delay={120}>
+        <div>
           <WorksCarousel items={works[language]} />
-        </Reveal>
+        </div>
       </div>
     </section>
   );

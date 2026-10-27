@@ -1,120 +1,156 @@
 "use client";
 
-import {
-  BroomIcon,
-  CarProfileIcon,
-  DropIcon,
-  SparkleIcon,
-  TagIcon,
-} from "@phosphor-icons/react/ssr";
 import { type Language, useLanguage } from "@/components/language-provider/language-provider";
-import MediaCard from "@/components/media-card/media-card";
-import Reveal from "@/components/reveal/reveal";
+import MobileCarousel from "@/components/mobile-carousel/mobile-carousel";
 import SectionHeader from "@/components/section-header/section-header";
 import ServiceCard from "@/components/service-card/service-card";
 
-// Icons follow the service order, so they stay correct in every language.
-const serviceIcons = [DropIcon, BroomIcon, CarProfileIcon, SparkleIcon, TagIcon];
+const unsplash = (id: string) =>
+  `https://images.unsplash.com/photo-${id}?fit=crop&fm=webp&q=80&w=1000`;
 
-const mediaImages = [
-  {
-    src: "https://images.unsplash.com/photo-1605437241278-c1806d14a4d9?fit=crop&fm=webp&q=80&w=1200",
-    unoptimized: true,
-    variant: "large" as const,
-  },
-  {
-    src: "https://images.unsplash.com/photo-1708805282683-50a060eba80f?fit=crop&fm=webp&q=80&w=1200",
-    variant: "small" as const,
-  },
+// Same order as the price packages: Essentiel, Premium, Prestige.
+const serviceImages = [
+  { src: unsplash("1605437241278-c1806d14a4d9"), unoptimized: true },
+  { src: unsplash("1708805282683-50a060eba80f") },
+  { src: unsplash("1761312834150-4beefff097a7") },
 ];
 
 const copy = {
   en: {
-    label: "Our services",
-    title: "Everything your car",
-    accent: "needs.",
-    description:
-      "From regular upkeep to complete transformation, every service is adapted to the condition of your vehicle.",
+    header: {
+      label: "Our services",
+      title: "Everything your car",
+      accent: "needs.",
+      description:
+        "Three core services, all carried out where your car is parked, plus specialist treatments for the details.",
+    },
     services: [
-      [
-        "Car Wash",
-        "A safe exterior wash that refreshes paintwork, glass, wheels and finishing details.",
-      ],
-      [
-        "Interior Detail",
-        "A deep reset for seats, carpets, trim and the surfaces you use every day.",
-      ],
-      [
-        "Full Detail",
-        "A complete interior-and-exterior treatment for a vehicle that needs a proper reset.",
-      ],
-      ["Headlight Polish", "Cleaning and polishing for clearer headlight lenses."],
-      [
-        "Sale Preparation",
-        "Presentation-led care that helps your vehicle make the right first impression.",
-      ],
+      {
+        title: "Interior cleaning",
+        description: "Seats, carpets, trim and interior glass, vacuumed and cleaned by hand.",
+        alt: "Leather seats and dashboard of a cleaned car interior",
+        link: "See the Essentiel package",
+      },
+      {
+        title: "Exterior cleaning",
+        description: "A careful hand wash for paintwork, wheels, tyres and glass.",
+        alt: "Gloved hand brushing a car tyre",
+        link: "See the Premium package",
+      },
+      {
+        title: "Full cleaning",
+        description: "Interior and exterior in one visit, finished with a final inspection.",
+        alt: "Black car covered in wash foam",
+        link: "See the Prestige package",
+      },
     ],
-    media: [
-      ["Interior care", "A cabin reset"],
-      ["Wheel detail", "Care through every detail"],
-    ],
+    treatments: {
+      title: "Specialist treatments",
+      note: "Add these to a package during the same appointment. Each package below lists the treatments it can include, with prices.",
+      items: [
+        [
+          "Headlight renovation",
+          "Restores cloudy, yellowed lenses so your lights shine clearly again.",
+        ],
+        ["Windshield polish", "Removes film and light marks for a clearer view of the road."],
+        ["Under-hood cleaning", "Lifts dust and grime from the engine bay."],
+        ["Odour extraction", "Treats lingering smells in the cabin at the source."],
+        ["Pet hair removal", "Lifts embedded hair from seats, carpets and the boot."],
+      ],
+    },
   },
   fr: {
-    label: "Nos services",
-    title: "Tout ce dont votre voiture",
-    accent: "a besoin.",
-    description:
-      "De l'entretien régulier à la remise à neuf complète, chaque service est adapté à l'état de votre véhicule.",
+    header: {
+      label: "Nos services",
+      title: "Tout ce dont votre voiture",
+      accent: "a besoin.",
+      description:
+        "Trois services principaux, réalisés là où votre voiture est garée, et des traitements spécifiques pour les détails.",
+    },
     services: [
-      [
-        "Lavage auto",
-        "Un lavage extérieur sûr pour la carrosserie, les vitres, les roues et les finitions.",
-      ],
-      [
-        "Detailing intérieur",
-        "Un nettoyage profond des sièges, tapis, garnitures et surfaces du quotidien.",
-      ],
-      [
-        "Detailing complet",
-        "Un traitement intérieur et extérieur complet pour donner un vrai coup de neuf.",
-      ],
-      ["Polissage des phares", "Nettoyage et polissage pour des optiques plus nets."],
-      [
-        "Préparation à la vente",
-        "Un soin axé sur la présentation pour une meilleure première impression.",
-      ],
+      {
+        title: "Nettoyage intérieur",
+        description:
+          "Sièges, tapis, garnitures et vitres intérieures, aspirés et nettoyés à la main.",
+        alt: "Sièges en cuir et tableau de bord d'un habitacle nettoyé",
+        link: "Voir le forfait Essentiel",
+      },
+      {
+        title: "Nettoyage extérieur",
+        description:
+          "Un lavage soigné à la main pour la carrosserie, les jantes, les pneus et les vitres.",
+        alt: "Main gantée brossant un pneu",
+        link: "Voir le forfait Premium",
+      },
+      {
+        title: "Nettoyage complet",
+        description:
+          "L'intérieur et l'extérieur en une seule intervention, avec un contrôle final.",
+        alt: "Voiture noire couverte de mousse de lavage",
+        link: "Voir le forfait Prestige",
+      },
     ],
-    media: [
-      ["Soin intérieur", "Un habitacle remis à neuf"],
-      ["Détail des roues", "Une attention aux détails"],
-    ],
+    treatments: {
+      title: "Traitements spécifiques",
+      note: "Ajoutez-les à un forfait lors du même rendez-vous. Chaque forfait ci-dessous indique les traitements disponibles et leurs prix.",
+      items: [
+        ["Rénovation des phares", "Redonne de la clarté aux optiques ternies et jaunies."],
+        [
+          "Polissage du pare-brise",
+          "Élimine le voile et les marques légères pour une meilleure visibilité.",
+        ],
+        ["Nettoyage sous le capot", "Retire la poussière et la saleté du compartiment moteur."],
+        ["Élimination des odeurs", "Traite à la source les odeurs persistantes dans l'habitacle."],
+        ["Poils d'animaux", "Retire les poils incrustés des sièges, des tapis et du coffre."],
+      ],
+    },
   },
 } satisfies Record<Language, unknown>;
 
 const ServicesSection = () => {
   const { language } = useLanguage();
-  const { services, media, ...header } = copy[language];
+  const { header, services, treatments } = copy[language];
 
   return (
     <section className="bg-paper py-(--section-space) text-void" id="services">
       <div className="shell">
         <SectionHeader {...header} accentOnNewLine={false} />
-        <Reveal className="mt-16 grid grid-cols-5 gap-4 max-lg:grid-cols-2 max-md:mt-12 max-md:grid-cols-1">
-          {services.map(([title, description], index) => (
+
+        <MobileCarousel ariaLabel={header.label} className="mt-16 max-md:mt-12" tone="light">
+          {services.map((service, index) => (
             <ServiceCard
-              description={description}
-              icon={serviceIcons[index]}
-              key={title}
-              number={String(index + 1).padStart(2, "0")}
-              title={title}
+              description={service.description}
+              image={{ ...serviceImages[index], alt: service.alt }}
+              key={service.title}
+              linkLabel={service.link}
+              title={service.title}
             />
           ))}
-        </Reveal>
-        <Reveal className="mt-4 grid grid-cols-[1.35fr_0.65fr] gap-4 max-md:grid-cols-1">
-          {mediaImages.map((image, index) => (
-            <MediaCard {...image} key={image.src} label={media[index][0]} title={media[index][1]} />
-          ))}
-        </Reveal>
+        </MobileCarousel>
+
+        <div className="mt-24 grid grid-cols-[0.8fr_1.2fr] gap-16 max-md:mt-16 max-md:grid-cols-1 max-md:gap-6">
+          <div>
+            <h3 className="m-0 text-[clamp(1.6rem,2.4vw,2.2rem)] font-normal tracking-[-0.03em]">
+              {treatments.title}
+            </h3>
+            <p className="mt-4 mb-0 max-w-80 text-[0.92rem] leading-[1.6] font-light text-ink-muted">
+              {treatments.note}
+            </p>
+          </div>
+          <dl className="m-0 divide-y divide-dark-rule border-y border-dark-rule">
+            {treatments.items.map(([name, description]) => (
+              <div
+                className="grid grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] gap-6 py-5 max-md:grid-cols-1 max-md:gap-1"
+                key={name}
+              >
+                <dt className="font-display text-[1.15rem] tracking-[-0.02em]">{name}</dt>
+                <dd className="m-0 text-[0.88rem] leading-[1.55] font-light text-ink-muted">
+                  {description}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
       </div>
     </section>
   );

@@ -175,9 +175,9 @@ const SiteHeader = () => {
             </div>
 
             <nav className="mt-[0.85rem] flex flex-col">
-              {links.map(([label, href], index) => (
+              {links.map(([label, href]) => (
                 <a
-                  className="flex items-baseline gap-[0.65rem] py-[0.45rem] text-[1.08rem] tracking-[-0.025em]"
+                  className="flex items-baseline py-[0.45rem] text-[1.08rem] tracking-[-0.025em]"
                   href={href}
                   key={href}
                   onClick={() => {
@@ -185,9 +185,6 @@ const SiteHeader = () => {
                     setIsMenuOpen(false);
                   }}
                 >
-                  <span className="text-[0.56rem] font-semibold tracking-widest text-gold">
-                    0{index + 1}
-                  </span>
                   {label}
                 </a>
               ))}

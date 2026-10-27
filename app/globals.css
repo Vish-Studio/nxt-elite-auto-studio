@@ -21,6 +21,17 @@
   --font-sans: var(--font-poppins), Arial, sans-serif;
   --font-display: var(--font-dm-sans), Arial, sans-serif;
 
+  /* Display scale: 1 = statement sections, 2 = standard section headings, 3 = headings inside panels. */
+  --text-display-1: clamp(2.8rem, 6.4vw, 7rem);
+  --text-display-1--line-height: 0.9;
+  --text-display-1--letter-spacing: -0.04em;
+  --text-display-2: clamp(3rem, 5vw, 5.5rem);
+  --text-display-2--line-height: 0.9;
+  --text-display-2--letter-spacing: -0.04em;
+  --text-display-3: clamp(2.6rem, 4vw, 4.6rem);
+  --text-display-3--line-height: 0.92;
+  --text-display-3--letter-spacing: -0.04em;
+
   --ease-motion: cubic-bezier(0.2, 0.7, 0.2, 1);
 
   --animate-panel-in: panel-in 0.45s var(--ease-motion) both;

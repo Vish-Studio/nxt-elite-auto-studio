@@ -1,6 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
+import SectionLabel from "@/components/section-label/section-label";
 import { useLanguage } from "@/components/language-provider/language-provider";
 import { getConsent, getServerConsent, setConsent, subscribeToConsent } from "@/lib/cookie-consent";
 
@@ -16,9 +17,9 @@ const CookieBanner = () => {
       role="dialog"
     >
       <div>
-        <p className="section-label mb-[0.6rem]" id="cookie-banner-title">
+        <SectionLabel className="mb-[0.6rem]" id="cookie-banner-title">
           Cookies
-        </p>
+        </SectionLabel>
         <p className="m-0 text-[0.85rem] leading-[1.6] text-fog">
           {fr
             ? "Nous utilisons des cookies d'analyse pour comprendre comment les visiteurs utilisent notre site et l'améliorer. Vous pouvez accepter ou refuser à tout moment."

@@ -1,11 +1,18 @@
 "use client";
 
 import { CaretLeftIcon, CaretRightIcon } from "@phosphor-icons/react/ssr";
+import { cn } from "@/lib/cn";
 import { Children, type ReactNode, useRef, useState } from "react";
 
-type MobileCarouselProps = { ariaLabel: string; children: ReactNode; className?: string };
+type MobileCarouselProps = {
+  ariaLabel: string;
+  children: ReactNode;
+  className?: string;
+  /** Colour scheme of the section, so the mobile controls stay visible. */
+  tone?: "light" | "dark";
+};
 
-const MobileCarousel = ({ ariaLabel, children, className = "" }: MobileCarouselProps) => {
+const MobileCarousel = ({ ariaLabel, children, className, tone = "dark" }: MobileCarouselProps) => {
   const slides = Children.toArray(children);
   const viewportRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -21,7 +28,7 @@ const MobileCarousel = ({ ariaLabel, children, className = "" }: MobileCarouselP
   if (!total) return null;
 
   return (
-    <div aria-label={ariaLabel} className={`relative mt-10 ${className}`.trim()} role="region">
+    <div aria-label={ariaLabel} className={cn("relative mt-10", className)} role="region">
       <div
         className="grid gap-4 max-md:flex max-md:snap-x max-md:snap-mandatory max-md:[scrollbar-width:none] max-md:overflow-x-auto max-md:overscroll-x-contain max-md:scroll-smooth max-md:pr-8 max-md:pb-[0.35rem] md:grid-cols-3 max-md:[&::-webkit-scrollbar]:hidden"
         onScroll={(event) => {
@@ -47,7 +54,10 @@ const MobileCarousel = ({ ariaLabel, children, className = "" }: MobileCarouselP
         <div className="flex gap-2">
           <button
             aria-label="Previous item"
-            className="inline-flex size-9 items-center justify-center border border-rule"
+            className={cn(
+              "inline-flex size-9 cursor-pointer items-center justify-center border bg-transparent",
+              tone === "light" ? "border-dark-rule text-void" : "border-rule text-ivory",
+            )}
             onClick={() => goTo(activeIndex - 1)}
             type="button"
           >
@@ -55,7 +65,10 @@ const MobileCarousel = ({ ariaLabel, children, className = "" }: MobileCarouselP
           </button>
           <button
             aria-label="Next item"
-            className="inline-flex size-9 items-center justify-center border border-rule"
+            className={cn(
+              "inline-flex size-9 cursor-pointer items-center justify-center border bg-transparent",
+              tone === "light" ? "border-dark-rule text-void" : "border-rule text-ivory",
+            )}
             onClick={() => goTo(activeIndex + 1)}
             type="button"
           >

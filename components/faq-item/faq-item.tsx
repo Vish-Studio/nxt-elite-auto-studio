@@ -7,7 +7,7 @@ type FaqItemProps = { question: string; answer: string };
 
 const FaqItem = ({ question, answer }: FaqItemProps) => (
   <details
-    className="bg-surface open:[&_svg]:rotate-45"
+    className="border border-rule bg-surface/80 backdrop-blur-sm open:[&_svg]:rotate-45"
     onToggle={(event) => {
       if (event.currentTarget.open) trackEvent("faq_open", { question });
     }}

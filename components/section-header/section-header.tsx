@@ -1,4 +1,3 @@
-import Reveal from "@/components/reveal/reveal";
 import SectionLabel from "@/components/section-label/section-label";
 import SectionTitle from "@/components/section-title/section-title";
 import { cn } from "@/lib/cn";
@@ -22,15 +21,10 @@ const SectionHeader = ({
   title,
   tone = "light",
 }: SectionHeaderProps) => (
-  <Reveal className="flex items-end justify-between max-md:flex-col max-md:items-start max-md:gap-8">
+  <div className="flex items-end justify-between max-md:flex-col max-md:items-start max-md:gap-8">
     <div>
       <SectionLabel className="mb-7">{label}</SectionLabel>
-      <SectionTitle
-        accent={accent}
-        accentOnNewLine={accentOnNewLine}
-        className="text-[clamp(2.8rem,5vw,5.5rem)] leading-[0.88] max-md:text-[clamp(3rem,13vw,4.5rem)]"
-        title={title}
-      />
+      <SectionTitle accent={accent} accentOnNewLine={accentOnNewLine} size={2} title={title} />
     </div>
     {description && (
       <p
@@ -42,7 +36,7 @@ const SectionHeader = ({
         {description}
       </p>
     )}
-  </Reveal>
+  </div>
 );
 
 export default SectionHeader;

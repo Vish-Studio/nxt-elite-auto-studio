@@ -169,7 +169,6 @@ const WorksCarousel = ({ items }: WorksCarouselProps) => {
             role="tab"
             type="button"
           >
-            <span className="text-[0.6rem] font-semibold text-gold">{pad(index + 1)}</span>
             {item.service}
           </button>
         ))}

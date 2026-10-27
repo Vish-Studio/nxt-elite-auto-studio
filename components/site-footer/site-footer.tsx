@@ -30,7 +30,7 @@ const copy = {
       ["FAQ", "#faq"],
       ["Testimonials", "#testimonials"],
     ],
-    services: ["Interior detailing", "Exterior detailing", "Full detailing", "Sale preparation"],
+    services: ["Interior cleaning", "Exterior cleaning", "Full cleaning", "Headlight renovation"],
     contact: ["Brussels, Belgium", "By appointment"],
     rights: "All rights reserved.",
     motto: "Quality · Precision · Finish",
@@ -53,10 +53,10 @@ const copy = {
       ["Témoignages", "#testimonials"],
     ],
     services: [
-      "Detailing intérieur",
-      "Detailing extérieur",
-      "Detailing complet",
-      "Préparation à la vente",
+      "Nettoyage intérieur",
+      "Nettoyage extérieur",
+      "Nettoyage complet",
+      "Rénovation des phares",
     ],
     contact: ["Bruxelles, Belgique", "Sur rendez-vous"],
     rights: "Tous droits réservés.",
@@ -89,7 +89,7 @@ const SiteFooter = () => {
               <BrandMark className="h-8 w-[42px] object-cover" />
               <b>Elite Auto Studio</b>
             </span>
-            <h2 className="mt-8 mb-0 text-[clamp(2.7rem,4.5vw,5rem)] leading-[0.88] font-normal tracking-[-0.04em]">
+            <h2 className="mt-8 mb-0 text-display-3 font-normal">
               {t.headline[0]}
               <br />
               {t.headline[1]}

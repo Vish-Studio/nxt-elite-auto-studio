@@ -101,7 +101,7 @@ const ServiceAreaMap = () => {
           <SectionTitle
             accent={t.title[1]}
             accentClassName="text-gold"
-            className="text-[clamp(2.8rem,4vw,4.6rem)] leading-[0.9]"
+            size={3}
             id="coverage-title"
             title={t.title[0]}
           />

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import FaqItem from "@/components/faq-item/faq-item";
 import { type Language, useLanguage } from "@/components/language-provider/language-provider";
 import SectionLabel from "@/components/section-label/section-label";
@@ -53,22 +54,25 @@ const FaqSection = () => {
   const t = copy[language];
 
   return (
-    <section
-      className="shell grid grid-cols-[0.8fr_1.2fr] gap-24 py-(--section-space) max-md:flex max-md:flex-col max-md:gap-12"
-      id="faq"
-    >
-      <div>
-        <SectionLabel className="mb-7">{t.label}</SectionLabel>
-        <SectionTitle
-          accent={t.accent}
-          className="text-[clamp(3.6rem,6vw,6.7rem)] leading-[0.88] max-md:text-[clamp(3rem,13vw,4.5rem)]"
-          title={t.title}
-        />
-      </div>
-      <div className="grid gap-3">
-        {t.faqs.map(([question, answer]) => (
-          <FaqItem answer={answer} key={question} question={question} />
-        ))}
+    <section className="relative isolate overflow-hidden py-(--section-space)" id="faq">
+      <Image
+        alt=""
+        className="-z-20 object-cover"
+        fill
+        sizes="100vw"
+        src="https://images.unsplash.com/photo-1605164598708-25701594473e?auto=format&fit=crop&q=80&w=2200"
+      />
+      <div className="absolute inset-0 -z-10 bg-linear-to-r from-void/95 via-void/85 to-void/60 max-md:bg-void/80 max-md:bg-none" />
+      <div className="shell grid grid-cols-[0.8fr_1.2fr] gap-24 max-md:flex max-md:flex-col max-md:gap-12">
+        <div>
+          <SectionLabel className="mb-7">{t.label}</SectionLabel>
+          <SectionTitle accent={t.accent} size={2} title={t.title} />
+        </div>
+        <div className="grid content-start gap-3">
+          {t.faqs.map(([question, answer]) => (
+            <FaqItem answer={answer} key={question} question={question} />
+          ))}
+        </div>
       </div>
     </section>
   );

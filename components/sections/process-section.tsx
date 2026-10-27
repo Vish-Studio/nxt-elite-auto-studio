@@ -1,10 +1,19 @@
 "use client";
 
 import { type Language, useLanguage } from "@/components/language-provider/language-provider";
-import ProcessStep from "@/components/process-step/process-step";
-import ProcessStepGallery from "@/components/process-step-gallery/process-step-gallery";
-import SectionLabel from "@/components/section-label/section-label";
-import SectionTitle from "@/components/section-title/section-title";
+import ProcessShowcase from "@/components/process-showcase/process-showcase";
+import SectionHeader from "@/components/section-header/section-header";
+
+const unsplash = (id: string) =>
+  `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&q=85&w=1600`;
+
+// One photo per step, in step order.
+const stepImages = [
+  unsplash("1727791712196-8d35b2ba2918"),
+  unsplash("1608259243654-70c070e0f6ed"),
+  unsplash("1694025909289-fb9dd4660e97"),
+  unsplash("1608506375591-b90e1f955e4b"),
+];
 
 const copy = {
   en: {
@@ -57,34 +66,20 @@ const copy = {
 
 const ProcessSection = () => {
   const { language } = useLanguage();
-  const t = copy[language];
+  const { steps, ...header } = copy[language];
 
   return (
     <section className="bg-paper py-(--section-space) text-void" id="process">
-      <div className="shell grid grid-cols-[0.8fr_1.2fr] gap-28 max-md:flex max-md:flex-col max-md:gap-8">
-        <div className="sticky top-[calc(var(--topbar-height)+3rem)] self-start max-md:static">
-          <SectionLabel className="mb-7">{t.label}</SectionLabel>
-          <SectionTitle
-            accent={t.accent}
-            className="mb-7 text-[clamp(3rem,4vw,4.8rem)] leading-[0.94] max-md:text-[clamp(3rem,13vw,4.5rem)]"
-            title={t.title}
-          />
-          <p className="max-w-76 text-[0.96rem] leading-[1.55] font-light text-ink-muted">
-            {t.description}
-          </p>
-        </div>
-        <div className="grid gap-3">
-          {t.steps.map(([title, description], index) => (
-            <ProcessStep
-              description={description}
-              key={title}
-              number={String(index + 1).padStart(2, "0")}
-              title={title}
-            />
-          ))}
-        </div>
+      <div className="shell">
+        <SectionHeader {...header} />
+        <ProcessShowcase
+          steps={steps.map(([title, description], index) => ({
+            description,
+            image: stepImages[index],
+            title,
+          }))}
+        />
       </div>
-      <ProcessStepGallery />
     </section>
   );
 };
