@@ -6,6 +6,7 @@ import TrackedLink from "@/components/analytics/tracked-link";
 import BrandMark from "@/components/brand-mark/brand-mark";
 import CookieSettingsButton from "@/components/cookie-consent/cookie-settings-button";
 import { type Language, useLanguage } from "@/components/language-provider/language-provider";
+import MaskLine from "@/components/mask-line/mask-line";
 import PrimaryLink from "@/components/primary-link/primary-link";
 import SocialLink from "@/components/social-link/social-link";
 
@@ -70,7 +71,10 @@ const columnText = "text-fog text-[0.74rem]";
 const columnLink = `${columnText} hover:text-ivory`;
 
 const FooterColumn = ({ children, title }: { children: ReactNode; title: string }) => (
-  <div className="flex min-w-0 flex-col gap-3 pr-8 pl-4 [overflow-wrap:anywhere] max-md:min-h-45 max-md:bg-surface max-md:p-[1.3rem]">
+  <div
+    className="flex min-w-0 flex-col gap-3 pr-8 pl-4 [overflow-wrap:anywhere] max-md:min-h-45 max-md:bg-surface max-md:p-[1.3rem]"
+    data-reveal
+  >
     <h3 className="mb-[0.8rem] text-[0.62rem] tracking-widest uppercase">{title}</h3>
     {children}
   </div>
@@ -89,14 +93,14 @@ const SiteFooter = () => {
               <BrandMark className="h-8 w-[42px] object-cover" />
               <b>Elite Auto Studio</b>
             </span>
-            <h2 className="mt-8 mb-0 text-display-3 font-normal">
-              {t.headline[0]}
-              <br />
-              {t.headline[1]}
+            <h2 className="mt-8 mb-0 flex flex-col text-display-3 font-normal">
+              <MaskLine>{t.headline[0]}</MaskLine>
+              <MaskLine>{t.headline[1]}</MaskLine>
             </h2>
           </div>
           <PrimaryLink
             href={`mailto:${EMAIL}`}
+            reveal
             track={{ event: "booking_click", params: { location: "footer" } }}
           >
             {t.cta}
@@ -104,7 +108,10 @@ const SiteFooter = () => {
         </div>
 
         <div className="grid grid-cols-[1.6fr_repeat(3,1fr)] gap-8 border-t border-rule py-10 max-md:grid-cols-2 max-md:gap-3">
-          <div className="flex min-w-0 flex-col gap-3 pr-8 max-md:col-span-full max-md:bg-surface max-md:p-[1.3rem]">
+          <div
+            className="flex min-w-0 flex-col gap-3 pr-8 max-md:col-span-full max-md:bg-surface max-md:p-[1.3rem]"
+            data-reveal
+          >
             <p className="m-0 max-w-76 text-[0.88rem] leading-[1.55] font-light text-fog">
               {t.intro}
             </p>

@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import GoogleAnalytics from "@/components/analytics/google-analytics";
 import CookieBanner from "@/components/cookie-consent/cookie-banner";
 import { LanguageProvider } from "@/components/language-provider/language-provider";
+import PageMotion from "@/components/page-motion/page-motion";
 import { publicAsset } from "@/lib/public-asset";
 import "./globals.css";
 
@@ -37,6 +38,7 @@ const RootLayout = ({ children }: Readonly<{ children: ReactNode }>) => (
     <body suppressHydrationWarning>
       <LanguageProvider>
         {children}
+        <PageMotion />
         <CookieBanner />
         <GoogleAnalytics />
       </LanguageProvider>

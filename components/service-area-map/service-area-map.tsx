@@ -105,13 +105,14 @@ const ServiceAreaMap = () => {
             id="coverage-title"
             title={t.title[0]}
           />
-          <p className="mt-6 mb-0 max-w-88 text-[0.82rem] leading-[1.6] text-ink-muted">
+          <p className="mt-6 mb-0 max-w-88 text-[0.82rem] leading-[1.6] text-ink-muted" data-reveal>
             {t.intro}
           </p>
 
           <div
             aria-label={t.tabs}
             className="mt-8 flex [scrollbar-width:none] gap-[1.4rem] overflow-x-auto border-b border-dark-rule [&::-webkit-scrollbar]:hidden"
+            data-reveal
             role="tablist"
           >
             <button
@@ -141,7 +142,12 @@ const ServiceAreaMap = () => {
             ))}
           </div>
 
-          <div className="mt-[1.1rem] min-h-54 max-md:min-h-0" id="coverage-panel" role="tabpanel">
+          <div
+            className="mt-[1.1rem] min-h-54 max-md:min-h-0"
+            data-reveal
+            id="coverage-panel"
+            role="tabpanel"
+          >
             {activeCountry ? (
               <ul className="m-0 grid list-none grid-cols-2 gap-x-5 gap-y-[0.6rem] p-0">
                 {activeCountry.localities.map(({ name }) => (
@@ -190,12 +196,16 @@ const ServiceAreaMap = () => {
             )}
           </div>
 
-          <p className="mt-[1.6rem] mb-7 max-w-88 border-t border-dark-rule pt-[1.1rem] text-[0.7rem] leading-[1.6] text-ink-muted">
+          <p
+            className="mt-[1.6rem] mb-7 max-w-88 border-t border-dark-rule pt-[1.1rem] text-[0.7rem] leading-[1.6] text-ink-muted"
+            data-reveal
+          >
             {t.note}
           </p>
           <PrimaryLink
             className="mt-auto self-start"
             href="#contact"
+            reveal
             track={{ event: "booking_click", params: { location: "service_area" } }}
           >
             {t.cta}

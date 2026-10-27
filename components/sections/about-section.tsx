@@ -74,7 +74,10 @@ const AboutSection = () => {
             size={1}
             title={t.title}
           />
-          <p className="mt-8 mb-0 max-w-160 text-[clamp(1rem,1.3vw,1.15rem)] leading-[1.7] font-light text-ink-muted">
+          <p
+            className="mt-8 mb-0 max-w-160 text-[clamp(1rem,1.3vw,1.15rem)] leading-[1.7] font-light text-ink-muted"
+            data-reveal
+          >
             {t.intro}
           </p>
         </div>
@@ -94,8 +97,10 @@ const AboutSection = () => {
         </div>
 
         <div className="mt-12 flex flex-wrap justify-center gap-3 max-md:flex-col">
-          <PrimaryLink href="#services">{t.servicesCta}</PrimaryLink>
-          <PrimaryLink href="#service-area" variant="outline">
+          <PrimaryLink href="#services" reveal>
+            {t.servicesCta}
+          </PrimaryLink>
+          <PrimaryLink href="#service-area" reveal variant="outline">
             {t.areaCta}
           </PrimaryLink>
         </div>

@@ -26,7 +26,7 @@ const PackageCard = ({
   const { language } = useLanguage();
   const ref = useTrackInView<HTMLElement>("package_view", { package: name });
   return (
-    <article ref={ref} className="flex h-full flex-col bg-surface p-7 max-md:p-6">
+    <article className="flex h-full flex-col bg-surface p-7 max-md:p-6" data-reveal ref={ref}>
       <div className="flex items-baseline justify-between gap-4">
         <p className="m-0 text-[0.64rem] font-semibold tracking-[0.1em] text-gold uppercase">
           {name}

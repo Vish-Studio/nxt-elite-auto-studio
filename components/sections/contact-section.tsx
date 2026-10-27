@@ -32,12 +32,13 @@ const ContactSection = () => {
           <SectionTitle accent={t.accent} className="mt-[1.6rem]" size={1} title={t.title} />
         </div>
         <div className="flex flex-col gap-8">
-          <p className="m-0 max-w-100 text-base leading-[1.55] font-light text-fog">
+          <p className="m-0 max-w-100 text-base leading-[1.55] font-light text-fog" data-reveal>
             {t.description}
           </p>
           <PrimaryLink
             className="self-start"
             href="mailto:hello@eliteautostudio.be"
+            reveal
             track={{ event: "booking_click", params: { location: "contact_band" } }}
           >
             {t.cta}

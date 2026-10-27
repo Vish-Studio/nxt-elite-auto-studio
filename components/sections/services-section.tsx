@@ -121,7 +121,7 @@ const ServicesSection = () => {
             <ServiceCard
               description={service.description}
               image={{ ...serviceImages[index], alt: service.alt }}
-              key={service.title}
+              key={serviceImages[index].src}
               linkLabel={service.link}
               title={service.title}
             />
@@ -130,18 +130,25 @@ const ServicesSection = () => {
 
         <div className="mt-24 grid grid-cols-[0.8fr_1.2fr] gap-16 max-md:mt-16 max-md:grid-cols-1 max-md:gap-6">
           <div>
-            <h3 className="m-0 text-[clamp(1.6rem,2.4vw,2.2rem)] font-normal tracking-[-0.03em]">
+            <h3
+              className="m-0 text-[clamp(1.6rem,2.4vw,2.2rem)] font-normal tracking-[-0.03em]"
+              data-reveal
+            >
               {treatments.title}
             </h3>
-            <p className="mt-4 mb-0 max-w-80 text-[0.92rem] leading-[1.6] font-light text-ink-muted">
+            <p
+              className="mt-4 mb-0 max-w-80 text-[0.92rem] leading-[1.6] font-light text-ink-muted"
+              data-reveal
+            >
               {treatments.note}
             </p>
           </div>
           <dl className="m-0 divide-y divide-dark-rule border-y border-dark-rule">
-            {treatments.items.map(([name, description]) => (
+            {treatments.items.map(([name, description], index) => (
               <div
                 className="grid grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] gap-6 py-5 max-md:grid-cols-1 max-md:gap-1"
-                key={name}
+                data-reveal
+                key={index}
               >
                 <dt className="font-display text-[1.15rem] tracking-[-0.02em]">{name}</dt>
                 <dd className="m-0 text-[0.88rem] leading-[1.55] font-light text-ink-muted">

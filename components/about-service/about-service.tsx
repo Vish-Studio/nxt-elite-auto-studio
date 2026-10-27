@@ -3,7 +3,10 @@ import type { ReactNode } from "react";
 type AboutServiceProps = { description: string; icon: ReactNode; title: string };
 
 const AboutService = ({ description, icon, title }: AboutServiceProps) => (
-  <article className="flex flex-col items-center px-6 py-10 text-center max-md:px-2 max-md:py-8">
+  <article
+    className="flex flex-col items-center px-6 py-10 text-center max-md:px-2 max-md:py-8"
+    data-reveal
+  >
     <span className="mb-6 grid size-14 place-items-center rounded-full border border-gold text-gold">
       {icon}
     </span>

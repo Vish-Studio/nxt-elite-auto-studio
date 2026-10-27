@@ -11,7 +11,7 @@ type ServiceCardProps = {
 
 /** A core service: photo, name, one-line scope and a link to its package. */
 const ServiceCard = ({ description, image, linkLabel, title }: ServiceCardProps) => (
-  <article className="flex h-full flex-col">
+  <article className="flex h-full flex-col" data-reveal>
     <div className="relative aspect-[4/5] overflow-hidden bg-surface max-md:aspect-[4/3]">
       <Image
         alt={image.alt}

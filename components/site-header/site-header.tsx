@@ -11,6 +11,7 @@ import LanguageSelector, {
 import PrimaryLink from "@/components/primary-link/primary-link";
 import { trackEvent } from "@/lib/analytics";
 import { cn } from "@/lib/cn";
+import { setScrollLocked } from "@/lib/smooth-scroll";
 
 const MobileNavigationMap = dynamic(
   () => import("@/components/mobile-navigation-map/mobile-navigation-map"),
@@ -80,10 +81,10 @@ const SiteHeader = () => {
     const closeOnEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") setIsMenuOpen(false);
     };
-    document.body.style.overflow = "hidden";
+    setScrollLocked(true);
     window.addEventListener("keydown", closeOnEscape);
     return () => {
-      document.body.style.overflow = "";
+      setScrollLocked(false);
       window.removeEventListener("keydown", closeOnEscape);
     };
   }, [isMenuOpen]);
@@ -159,6 +160,7 @@ const SiteHeader = () => {
             aria-label="Mobile navigation"
             aria-modal="true"
             className="absolute inset-y-0 left-0 flex min-h-svh w-[min(86vw,23rem)] animate-panel-in flex-col overflow-y-auto bg-surface p-5 text-ivory motion-reduce:animate-none"
+            data-lenis-prevent
             id="mobile-navigation"
             role="dialog"
           >

@@ -68,6 +68,7 @@ const WorksCarousel = ({ items }: WorksCarouselProps) => {
       aria-label={t.region}
       aria-roledescription="carousel"
       className="mt-16 max-md:mt-12"
+      data-reveal
       onKeyDown={onKeyDown}
     >
       <div

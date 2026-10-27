@@ -9,6 +9,8 @@ type PrimaryLinkProps = {
   /** Layout-only classes (alignment, width). Visual styles come from `variant` and `size`. */
   className?: string;
   href: string;
+  /** Fade in with the rest of the section (see PageMotion). */
+  reveal?: boolean;
   size?: "md" | "sm";
   track?: { event: string; params?: AnalyticsParams };
   variant?: "gold" | "outline";
@@ -28,12 +30,13 @@ const PrimaryLink = ({
   children,
   className,
   href,
+  reveal = false,
   size = "md",
   track,
   variant = "gold",
 }: PrimaryLinkProps) => {
   const classes = cn(
-    "inline-flex items-center justify-center gap-4 font-semibold tracking-[0.1em] whitespace-nowrap uppercase transition-transform duration-200 hover:-translate-y-0.5",
+    "inline-flex items-center justify-center gap-4 font-semibold tracking-[0.1em] whitespace-nowrap uppercase transition-[translate] duration-200 hover:-translate-y-0.5",
     variants[variant],
     sizes[size],
     className,
@@ -46,11 +49,17 @@ const PrimaryLink = ({
   );
 
   return track ? (
-    <TrackedLink className={classes} event={track.event} eventParams={track.params} href={href}>
+    <TrackedLink
+      className={classes}
+      data-reveal={reveal || undefined}
+      event={track.event}
+      eventParams={track.params}
+      href={href}
+    >
       {content}
     </TrackedLink>
   ) : (
-    <a className={classes} href={href}>
+    <a className={classes} data-reveal={reveal || undefined} href={href}>
       {content}
     </a>
   );

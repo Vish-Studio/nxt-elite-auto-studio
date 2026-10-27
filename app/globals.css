@@ -82,12 +82,8 @@
 
 @layer base {
   html {
-    scroll-behavior: smooth;
+    /* Native fallback for anchor links; with motion allowed, Lenis performs the smooth scroll. */
     scroll-padding-top: calc(var(--topbar-height) + 1.5rem);
-
-    @media (width < 761px) {
-      scroll-behavior: auto;
-    }
   }
 
   body {
@@ -109,4 +105,41 @@
 @utility shell {
   margin-inline: auto;
   width: var(--shell);
+}
+
+/* Lenis smooth scrolling (https://lenis.darkroom.engineering). */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/*
+ * Scroll reveals start hidden only when scripting is on and motion is allowed, so the page is
+ * fully readable without JavaScript or with reduced motion. PageMotion (GSAP) reveals them.
+ */
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  main [data-reveal],
+  main [data-heading-line] {
+    visibility: hidden;
+  }
+
+  main [data-reveal] {
+    opacity: 0;
+  }
 }

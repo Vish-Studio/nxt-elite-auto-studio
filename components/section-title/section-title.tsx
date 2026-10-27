@@ -1,3 +1,4 @@
+import MaskLine from "@/components/mask-line/mask-line";
 import { cn } from "@/lib/cn";
 
 type SectionTitleProps = {
@@ -24,12 +25,23 @@ const SectionTitle = ({
   id,
   size = 2,
   title,
-}: SectionTitleProps) => (
-  <h2 className={cn("m-0 font-normal", sizes[size], className)} id={id}>
-    {title}
-    {accentOnNewLine ? <br /> : " "}
-    <span className={cn("font-light", accentClassName)}>{accent}</span>
-  </h2>
-);
+}: SectionTitleProps) => {
+  const accentText = <span className={cn("font-light", accentClassName)}>{accent}</span>;
+
+  return (
+    <h2 className={cn("m-0 flex flex-col font-normal", sizes[size], className)} id={id}>
+      {accentOnNewLine ? (
+        <>
+          <MaskLine>{title}</MaskLine>
+          <MaskLine>{accentText}</MaskLine>
+        </>
+      ) : (
+        <MaskLine>
+          {title} {accentText}
+        </MaskLine>
+      )}
+    </h2>
+  );
+};
 
 export default SectionTitle;

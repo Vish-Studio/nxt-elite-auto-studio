@@ -63,9 +63,25 @@ Corners are square everywhere. The only round shapes are the icon rings in the a
 | Language-aware copy                              | `useLanguage()`; colocate `copy = { en, fr } satisfies Record<Language, unknown>` in the section file         |
 | Prices                                           | `formatPrice(amount, language)` — never `Intl`, it can differ between server and browser                      |
 | Images                                           | `next/image` with `fill` + `object-cover` inside a sized, `relative overflow-hidden` box; always pass `sizes` |
+| Headline that animates in                        | `SectionTitle`, or `MaskLine` per line for a custom `h1`/`h2`                                                 |
 | Tracked links/buttons                            | `TrackedLink` or `PrimaryLink track={…}`; events go through `trackEvent` (consent-gated)                      |
 
 Sections live in `components/sections/*-section.tsx`; `app/page.tsx` only lists them and stays a server component. Any component using hooks or event handlers needs `"use client"`.
+
+## Motion (GSAP + Lenis)
+
+`components/page-motion/page-motion.tsx` is mounted once in `app/layout.tsx` and owns all of it:
+
+- **Smooth scroll**: Lenis drives wheel scrolling (touch keeps native scrolling) on GSAP's ticker, and handles in-page `#anchor` jumps. It reads the page's `scroll-padding-top`, so never add your own offset. Lock scrolling with `setScrollLocked()` from `lib/smooth-scroll.ts`, never by setting `body.style.overflow`; give inner scrollable panels `data-lenis-prevent`.
+- **Reveal order**: headline lines first, then content. Mark what animates and nothing else:
+  - Headlines: use `SectionTitle`/`MaskLine`. Each line is a clipped mask whose inner `[data-heading-line]` slides up. A heading made of several lines needs `flex flex-col` on the `h1`/`h2` (otherwise the masks' negative margins collapse).
+  - Content: add `data-reveal` to the element (label, paragraph, card, carousel, list row…). `PrimaryLink` takes a `reveal` prop. Elements in a row stagger automatically; content waits briefly for its section's headline.
+  - Content that scrolls sideways (a swipeable carousel): put `data-reveal-group` on its root so the whole group reveals together; its `data-reveal` children can sit off-screen and would never count as visible on their own.
+  - Only elements inside `<main>` are hidden before they reveal. Don't use `data-reveal` outside it (e.g. the cookie banner).
+- **Rules**: never put a CSS `transition` on `transform` (or `transition-transform` / `transition-all`) on a `data-reveal` element, because it fights GSAP; use `transition-[translate]` for hover movement. Don't use GSAP's SplitText on React-rendered text (it rewrites the DOM and breaks on language change). Keys of translated lists must not be the translated text.
+- **Fallbacks**: the hidden state only applies when scripting is on and reduced motion is off (`globals.css`), so the page is fully readable otherwise. Elements React mounts later are shown immediately. The hero photo parallax is a scrubbed ScrollTrigger in `hero-background-carousel.tsx`.
+- **Why IntersectionObserver, not ScrollTrigger, fires reveals**: ScrollTrigger stores trigger positions, which go stale when images, fonts or the language change the page height, leaving elements hidden even though they are on screen. IntersectionObserver reads live layout. Keep ScrollTrigger only for scrubbed effects (the hero parallax). After changing reveal code, test with real wheel scrolling and pauses, not only instant jumps.
+- Use `import { gsap, ScrollTrigger } from "@/lib/gsap"` (registers the plugin once); wrap new tweens in `gsap.matchMedia()` so they clean up and respect reduced motion.
 
 ## Section recipe
 
@@ -86,7 +102,7 @@ Sections live in `components/sections/*-section.tsx`; `app/page.tsx` only lists 
 
 - **Lead with the mobile service.** Coming to the customer's home or workplace is the main selling point; repeat it where it helps a decision (about, pricing badge, process).
 - **Structure must carry meaning.** Numbered markers (01, 02…) only for real sequences (the process steps) or position counters ("02 / 04"). Don't number lists of services, links or projects.
-- **Motion is earned.** The hero entrance is the single scroll-independent animation. Everything else moves only in response to the visitor (carousels, tabs, FAQ, menu) or to show progress (process timer). Don't wrap sections in fade-in-on-scroll. Always add `motion-reduce:` fallbacks.
+- **Motion is one system.** Smooth scrolling and every scroll reveal come from `PageMotion` (GSAP + Lenis, see "Motion" below); don't add per-component scroll animations or ad-hoc fade-ins. Other movement responds to the visitor (carousels, tabs, FAQ, menu) or shows progress (process timer). Always keep `motion-reduce:` fallbacks.
 - **One accent per block.** Gold marks the active or most important thing; don't stack gold labels, gold text and gold borders in the same small area.
 - **Same job, same component.** Before building something new, check the table above.
 - **Real content first.** Prefer the client's own photos in `public/works/` over stock. Service names, packages and add-ons must match the pricing data in `pricing-section.tsx`.

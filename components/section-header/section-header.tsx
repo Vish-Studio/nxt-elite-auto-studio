@@ -28,6 +28,7 @@ const SectionHeader = ({
     </div>
     {description && (
       <p
+        data-reveal
         className={cn(
           "m-0 max-w-[22rem] text-[0.96rem] leading-[1.55] font-light",
           tone === "dark" ? "text-fog" : "text-ink-muted",

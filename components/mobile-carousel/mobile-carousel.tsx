@@ -28,7 +28,12 @@ const MobileCarousel = ({ ariaLabel, children, className, tone = "dark" }: Mobil
   if (!total) return null;
 
   return (
-    <div aria-label={ariaLabel} className={cn("relative mt-10", className)} role="region">
+    <div
+      aria-label={ariaLabel}
+      className={cn("relative mt-10", className)}
+      data-reveal-group
+      role="region"
+    >
       <div
         className="grid gap-4 max-md:flex max-md:snap-x max-md:snap-mandatory max-md:[scrollbar-width:none] max-md:overflow-x-auto max-md:overscroll-x-contain max-md:scroll-smooth max-md:pr-8 max-md:pb-[0.35rem] md:grid-cols-3 max-md:[&::-webkit-scrollbar]:hidden"
         onScroll={(event) => {

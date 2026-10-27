@@ -16,7 +16,11 @@ const sizes = {
 
 /** Small gold eyebrow shown above section headlines. */
 const SectionLabel = ({ children, className, id, size = "md" }: SectionLabelProps) => (
-  <p className={cn("m-0 font-semibold text-gold uppercase", sizes[size], className)} id={id}>
+  <p
+    className={cn("m-0 font-semibold text-gold uppercase", sizes[size], className)}
+    id={id}
+    data-reveal
+  >
     {children}
   </p>
 );

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { gsap } from "@/lib/gsap";
 
 type Slide = { alt: string; src: string; unoptimized?: boolean };
 
@@ -44,38 +45,25 @@ const HeroBackgroundCarousel = () => {
     return () => window.clearInterval(timer);
   }, []);
 
+  // Drift the photos slowly as the hero scrolls away. Scrubbed to the (smoothed) scroll position.
   useEffect(() => {
     const carousel = carouselRef.current;
     if (!carousel) return;
 
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const mobileViewport = window.matchMedia("(max-width: 760px)");
-    let animationFrame = 0;
+    const motion = gsap.matchMedia();
+    motion.add("(min-width: 761px) and (prefers-reduced-motion: no-preference)", () => {
+      gsap.fromTo(
+        carousel,
+        { "--hero-parallax": "0px" },
+        {
+          "--hero-parallax": "110px",
+          ease: "none",
+          scrollTrigger: { end: "+=690", scrub: true, start: 0, trigger: document.documentElement },
+        },
+      );
+    });
 
-    const updateParallax = () => {
-      animationFrame = 0;
-      const offset =
-        reducedMotion.matches || mobileViewport.matches ? 0 : Math.min(window.scrollY * 0.16, 110);
-      carousel.style.setProperty("--hero-parallax", `${offset.toFixed(2)}px`);
-    };
-
-    const requestUpdate = () => {
-      if (!animationFrame) animationFrame = window.requestAnimationFrame(updateParallax);
-    };
-
-    updateParallax();
-    window.addEventListener("scroll", requestUpdate, { passive: true });
-    window.addEventListener("resize", requestUpdate);
-    reducedMotion.addEventListener("change", requestUpdate);
-    mobileViewport.addEventListener("change", requestUpdate);
-
-    return () => {
-      window.cancelAnimationFrame(animationFrame);
-      window.removeEventListener("scroll", requestUpdate);
-      window.removeEventListener("resize", requestUpdate);
-      reducedMotion.removeEventListener("change", requestUpdate);
-      mobileViewport.removeEventListener("change", requestUpdate);
-    };
+    return () => motion.revert();
   }, []);
 
   return (

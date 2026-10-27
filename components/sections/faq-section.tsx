@@ -69,8 +69,8 @@ const FaqSection = () => {
           <SectionTitle accent={t.accent} size={2} title={t.title} />
         </div>
         <div className="grid content-start gap-3">
-          {t.faqs.map(([question, answer]) => (
-            <FaqItem answer={answer} key={question} question={question} />
+          {t.faqs.map(([question, answer], index) => (
+            <FaqItem answer={answer} key={index} question={question} />
           ))}
         </div>
       </div>

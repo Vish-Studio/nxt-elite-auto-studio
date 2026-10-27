@@ -29,7 +29,7 @@ const TestimonialCarousel = ({ testimonials }: TestimonialCarouselProps) => {
   if (!total) return null;
 
   return (
-    <div aria-label="Client testimonials" className="mt-16" role="region">
+    <div aria-label="Client testimonials" className="mt-16" data-reveal role="region">
       <div aria-live="polite" className="relative min-h-[480px]">
         {testimonials.map((testimonial, index) => (
           <div

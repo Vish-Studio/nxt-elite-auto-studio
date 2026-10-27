@@ -45,6 +45,7 @@ const ProcessShowcase = ({ steps }: ProcessShowcaseProps) => {
           aria-label={t.steps}
           aria-orientation="vertical"
           className="border-t border-dark-rule"
+          data-reveal
           role="tablist"
         >
           {steps.map((step, index) => (
@@ -84,6 +85,7 @@ const ProcessShowcase = ({ steps }: ProcessShowcaseProps) => {
         <PrimaryLink
           className="mt-10 self-start max-md:mt-8"
           href="#contact"
+          reveal
           track={{ event: "booking_click", params: { location: "process" } }}
         >
           {t.cta}
@@ -92,6 +94,7 @@ const ProcessShowcase = ({ steps }: ProcessShowcaseProps) => {
 
       <div
         className="relative min-h-130 overflow-hidden bg-void max-lg:row-start-1 max-lg:aspect-[4/3] max-lg:min-h-0"
+        data-reveal
         id="process-panel"
         role="tabpanel"
       >
